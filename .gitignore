@@ -1,0 +1,20 @@
+# Environments
+.env
+.venv/
+env/
+venv/
+
+# Python / Cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Data & Vector Databases
+chroma_db/
+*.csv
+*.json
+*.parquet
+*.sqlite3
+
+# OS Files
+.DS_Store
