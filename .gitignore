@@ -30,6 +30,8 @@ env/
 data/raw/
 data/processed/
 *.csv
+*.json
+*.parquet
 *.db
 *.sqlite3
 chroma_db/
@@ -45,4 +47,3 @@ Thumbs.db
 # Keeps planning docs (prd.md, docs/*.md) private; only README.md is published.
 *.md
 !README.md
-
