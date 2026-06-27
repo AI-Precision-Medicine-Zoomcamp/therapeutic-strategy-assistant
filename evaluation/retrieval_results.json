@@ -1,0 +1,307 @@
+{
+  "question_count": 15,
+  "hit_count": 15,
+  "hit_rate": 1.0,
+  "results": [
+    {
+      "question": "Which drugs target EGFR?",
+      "expected_source": "ChEMBL; DGIdb",
+      "category": "Drug Matching",
+      "hit": true,
+      "top_ids": [
+        "egfr-071-av412",
+        "egfr-018-lazertinibmesylate",
+        "egfr-050-losatuxizumabvedotin",
+        "egfr-064-nazartinib",
+        "egfr-022-firmonertinib"
+      ],
+      "top_drugs": [
+        "AV-412",
+        "LAZERTINIB MESYLATE",
+        "LOSATUXIZUMAB VEDOTIN",
+        "NAZARTINIB",
+        "FIRMONERTINIB"
+      ]
+    },
+    {
+      "question": "Which EGFR therapies are approved according to ChEMBL max_phase?",
+      "expected_source": "ChEMBL",
+      "category": "Approval Status",
+      "hit": true,
+      "top_ids": [
+        "egfr-050-losatuxizumabvedotin",
+        "egfr-030-modotuximab",
+        "egfr-026-abivertinib",
+        "egfr-018-lazertinibmesylate",
+        "egfr-040-tomuzotuximab"
+      ],
+      "top_drugs": [
+        "LOSATUXIZUMAB VEDOTIN",
+        "MODOTUXIMAB",
+        "ABIVERTINIB",
+        "LAZERTINIB MESYLATE",
+        "TOMUZOTUXIMAB"
+      ]
+    },
+    {
+      "question": "Which EGFR therapies have FDA label evidence?",
+      "expected_source": "openFDA",
+      "category": "Drug Label Evidence",
+      "hit": true,
+      "top_ids": [
+        "egfr-018-lazertinibmesylate",
+        "egfr-011-osimertinib",
+        "egfr-071-av412",
+        "egfr-003-cetuximab",
+        "egfr-050-losatuxizumabvedotin"
+      ],
+      "top_drugs": [
+        "LAZERTINIB MESYLATE",
+        "OSIMERTINIB",
+        "AV-412",
+        "CETUXIMAB",
+        "LOSATUXIZUMAB VEDOTIN"
+      ]
+    },
+    {
+      "question": "Which EGFR therapies have clinical trial evidence?",
+      "expected_source": "ClinicalTrials.gov",
+      "category": "Clinical Trials",
+      "hit": true,
+      "top_ids": [
+        "egfr-018-lazertinibmesylate",
+        "egfr-004-erlotinibhydrochloride",
+        "egfr-071-av412",
+        "egfr-015-mobocertinib",
+        "egfr-003-cetuximab"
+      ],
+      "top_drugs": [
+        "LAZERTINIB MESYLATE",
+        "ERLOTINIB HYDROCHLORIDE",
+        "AV-412",
+        "MOBOCERTINIB",
+        "CETUXIMAB"
+      ]
+    },
+    {
+      "question": "Which EGFR therapies have late-phase clinical trials?",
+      "expected_source": "ClinicalTrials.gov",
+      "category": "Clinical Trials",
+      "hit": true,
+      "top_ids": [
+        "egfr-018-lazertinibmesylate",
+        "egfr-050-losatuxizumabvedotin",
+        "egfr-071-av412",
+        "egfr-028-aumolertinib",
+        "egfr-015-mobocertinib"
+      ],
+      "top_drugs": [
+        "LAZERTINIB MESYLATE",
+        "LOSATUXIZUMAB VEDOTIN",
+        "AV-412",
+        "AUMOLERTINIB",
+        "MOBOCERTINIB"
+      ]
+    },
+    {
+      "question": "Which EGFR therapies have PubMed literature evidence?",
+      "expected_source": "PubMed",
+      "category": "Literature Evidence",
+      "hit": true,
+      "top_ids": [
+        "egfr-018-lazertinibmesylate",
+        "egfr-071-av412",
+        "egfr-004-erlotinibhydrochloride",
+        "egfr-028-aumolertinib",
+        "egfr-070-ac480"
+      ],
+      "top_drugs": [
+        "LAZERTINIB MESYLATE",
+        "AV-412",
+        "ERLOTINIB HYDROCHLORIDE",
+        "AUMOLERTINIB",
+        "AC-480"
+      ]
+    },
+    {
+      "question": "What is the mechanism of action for gefitinib?",
+      "expected_source": "ChEMBL",
+      "category": "Mechanism of Action",
+      "hit": true,
+      "top_ids": [
+        "egfr-001-gefitinib",
+        "egfr-002-panitumumab",
+        "egfr-064-nazartinib",
+        "egfr-017-mobocertinibsuccinate",
+        "egfr-058-cep32496"
+      ],
+      "top_drugs": [
+        "GEFITINIB",
+        "PANITUMUMAB",
+        "NAZARTINIB",
+        "MOBOCERTINIB SUCCINATE",
+        "CEP-32496"
+      ]
+    },
+    {
+      "question": "What evidence supports osimertinib as an EGFR-targeting therapy?",
+      "expected_source": "ChEMBL; DGIdb; openFDA",
+      "category": "Evidence Summary",
+      "hit": true,
+      "top_ids": [
+        "egfr-011-osimertinib",
+        "egfr-008-osimertinibmesylate",
+        "egfr-021-dacomitinibanhydrous",
+        "egfr-002-panitumumab",
+        "egfr-018-lazertinibmesylate"
+      ],
+      "top_drugs": [
+        "OSIMERTINIB",
+        "OSIMERTINIB MESYLATE",
+        "DACOMITINIB ANHYDROUS",
+        "PANITUMUMAB",
+        "LAZERTINIB MESYLATE"
+      ]
+    },
+    {
+      "question": "Does cetuximab have evidence as an EGFR-targeting therapy?",
+      "expected_source": "ChEMBL; PubMed; ClinicalTrials.gov",
+      "category": "Evidence Summary",
+      "hit": true,
+      "top_ids": [
+        "egfr-003-cetuximab",
+        "egfr-043-depatuxizumab",
+        "egfr-011-osimertinib",
+        "egfr-031-depatuxizumabmafodotin",
+        "egfr-050-losatuxizumabvedotin"
+      ],
+      "top_drugs": [
+        "CETUXIMAB",
+        "DEPATUXIZUMAB",
+        "OSIMERTINIB",
+        "DEPATUXIZUMAB MAFODOTIN",
+        "LOSATUXIZUMAB VEDOTIN"
+      ]
+    },
+    {
+      "question": "Which drugs have the strongest combined EGFR evidence score?",
+      "expected_source": "Merged knowledge base",
+      "category": "Ranking",
+      "hit": true,
+      "top_ids": [
+        "egfr-071-av412",
+        "egfr-022-firmonertinib",
+        "egfr-057-falnidamol",
+        "egfr-064-nazartinib",
+        "egfr-026-abivertinib"
+      ],
+      "top_drugs": [
+        "AV-412",
+        "FIRMONERTINIB",
+        "FALNIDAMOL",
+        "NAZARTINIB",
+        "ABIVERTINIB"
+      ]
+    },
+    {
+      "question": "What diseases are associated with EGFR in Open Targets?",
+      "expected_source": "Open Targets",
+      "category": "Target-Disease Context",
+      "hit": true,
+      "top_ids": [
+        "egfr-060-varlitinib",
+        "egfr-071-av412",
+        "egfr-050-losatuxizumabvedotin",
+        "egfr-061-sapitinib",
+        "egfr-035-canertinibdihydrochloride"
+      ],
+      "top_drugs": [
+        "VARLITINIB",
+        "AV-412",
+        "LOSATUXIZUMAB VEDOTIN",
+        "SAPITINIB",
+        "CANERTINIB DIHYDROCHLORIDE"
+      ]
+    },
+    {
+      "question": "What is EGFR as a protein target?",
+      "expected_source": "UniProt",
+      "category": "Target Metadata",
+      "hit": true,
+      "top_ids": [
+        "egfr-072-jnj26483327",
+        "egfr-018-lazertinibmesylate",
+        "egfr-071-av412",
+        "egfr-050-losatuxizumabvedotin",
+        "egfr-060-varlitinib"
+      ],
+      "top_drugs": [
+        "JNJ-26483327",
+        "LAZERTINIB MESYLATE",
+        "AV-412",
+        "LOSATUXIZUMAB VEDOTIN",
+        "VARLITINIB"
+      ]
+    },
+    {
+      "question": "Which EGFR-linked drugs have DrugCentral indication evidence?",
+      "expected_source": "DrugCentral",
+      "category": "Indication Evidence",
+      "hit": true,
+      "top_ids": [
+        "egfr-050-losatuxizumabvedotin",
+        "egfr-071-av412",
+        "egfr-018-lazertinibmesylate",
+        "egfr-026-abivertinib",
+        "egfr-022-firmonertinib"
+      ],
+      "top_drugs": [
+        "LOSATUXIZUMAB VEDOTIN",
+        "AV-412",
+        "LAZERTINIB MESYLATE",
+        "ABIVERTINIB",
+        "FIRMONERTINIB"
+      ]
+    },
+    {
+      "question": "Which EGFR recommendations have weak or missing external evidence?",
+      "expected_source": "Merged knowledge base",
+      "category": "Evidence Gaps",
+      "hit": true,
+      "top_ids": [
+        "egfr-036-tesevatinib",
+        "egfr-015-mobocertinib",
+        "egfr-071-av412",
+        "egfr-018-lazertinibmesylate",
+        "egfr-011-osimertinib"
+      ],
+      "top_drugs": [
+        "TESEVATINIB",
+        "MOBOCERTINIB",
+        "AV-412",
+        "LAZERTINIB MESYLATE",
+        "OSIMERTINIB"
+      ]
+    },
+    {
+      "question": "Can an EGFR therapy be considered for repurposing based on drug-target and evidence signals?",
+      "expected_source": "ChEMBL; DGIdb; Open Targets; PubMed",
+      "category": "Repurposing Signal",
+      "hit": true,
+      "top_ids": [
+        "egfr-071-av412",
+        "egfr-050-losatuxizumabvedotin",
+        "egfr-003-cetuximab",
+        "egfr-072-jnj26483327",
+        "egfr-015-mobocertinib"
+      ],
+      "top_drugs": [
+        "AV-412",
+        "LOSATUXIZUMAB VEDOTIN",
+        "CETUXIMAB",
+        "JNJ-26483327",
+        "MOBOCERTINIB"
+      ]
+    }
+  ]
+}

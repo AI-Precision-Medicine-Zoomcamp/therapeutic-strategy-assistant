@@ -31,11 +31,15 @@ data/raw/
 data/processed/
 *.csv
 *.json
+!evaluation/retrieval_results.json
 *.parquet
 *.db
 *.sqlite3
 chroma_db/
 faq.db
+
+# ===== Internal team coordination docs =====
+weekly update from team/
 
 # ===== OS / editor =====
 .DS_Store

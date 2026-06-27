@@ -1,10 +1,10 @@
 .PHONY: setup test run up down
 
 setup:
-	pip install -r requirements.txt
+	uv sync
 
 test:
-	pytest tests/
+	uv run pytest tests/
 
 up:
 	docker-compose up --build

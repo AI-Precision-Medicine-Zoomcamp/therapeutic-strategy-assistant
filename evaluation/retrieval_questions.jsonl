@@ -1,0 +1,15 @@
+{"question": "Which drugs target EGFR?", "expected_source": "ChEMBL; DGIdb", "category": "Drug Matching"}
+{"question": "Which EGFR therapies are approved according to ChEMBL max_phase?", "expected_source": "ChEMBL", "category": "Approval Status"}
+{"question": "Which EGFR therapies have FDA label evidence?", "expected_source": "openFDA", "category": "Drug Label Evidence"}
+{"question": "Which EGFR therapies have clinical trial evidence?", "expected_source": "ClinicalTrials.gov", "category": "Clinical Trials"}
+{"question": "Which EGFR therapies have late-phase clinical trials?", "expected_source": "ClinicalTrials.gov", "category": "Clinical Trials"}
+{"question": "Which EGFR therapies have PubMed literature evidence?", "expected_source": "PubMed", "category": "Literature Evidence"}
+{"question": "What is the mechanism of action for gefitinib?", "expected_source": "ChEMBL", "category": "Mechanism of Action"}
+{"question": "What evidence supports osimertinib as an EGFR-targeting therapy?", "expected_source": "ChEMBL; DGIdb; openFDA", "category": "Evidence Summary"}
+{"question": "Does cetuximab have evidence as an EGFR-targeting therapy?", "expected_source": "ChEMBL; PubMed; ClinicalTrials.gov", "category": "Evidence Summary"}
+{"question": "Which drugs have the strongest combined EGFR evidence score?", "expected_source": "Merged knowledge base", "category": "Ranking"}
+{"question": "What diseases are associated with EGFR in Open Targets?", "expected_source": "Open Targets", "category": "Target-Disease Context"}
+{"question": "What is EGFR as a protein target?", "expected_source": "UniProt", "category": "Target Metadata"}
+{"question": "Which EGFR-linked drugs have DrugCentral indication evidence?", "expected_source": "DrugCentral", "category": "Indication Evidence"}
+{"question": "Which EGFR recommendations have weak or missing external evidence?", "expected_source": "Merged knowledge base", "category": "Evidence Gaps"}
+{"question": "Can an EGFR therapy be considered for repurposing based on drug-target and evidence signals?", "expected_source": "ChEMBL; DGIdb; Open Targets; PubMed", "category": "Repurposing Signal"}
