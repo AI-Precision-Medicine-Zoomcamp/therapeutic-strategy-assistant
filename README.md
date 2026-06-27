@@ -1,86 +1,134 @@
 # Therapeutic Strategy Assistant
 
-Evidence-grounded retrieval prototype for answering:
+Therapeutic Strategy Assistant is a biomedical retrieval project for connecting a known therapeutic target to existing drugs, mechanisms, clinical evidence, and supporting biomedical sources.
+
+The current minimum viable product focuses on one target:
 
 ```text
-What existing therapies can act on this target?
+EGFR - Epidermal growth factor receptor
 ```
 
-Current MVP target: `EGFR`.
+The project answers research questions such as:
 
-This project is a research-support tool. It connects an existing biological target to known therapies, mechanisms, evidence sources, and confidence signals. It does not discover new targets and does not provide clinical treatment advice.
+```text
+Which existing therapies target EGFR, and what evidence supports them?
+```
 
-## Current Status
+This is a research-support prototype. It is not a clinical decision system, does not recommend treatment for individual patients, and does not perform novel target discovery.
 
-Week 1-3 work is complete for the EGFR MVP.
+## Project Scope
 
-| Week | Goal | Status |
+The current implementation covers the Week 1 to Week 3 milestone:
+
+| Milestone | Status | Output |
 | --- | --- | --- |
-| Week 1 | Define project scope | Complete |
-| Week 2 | Select and explore datasets | Complete |
-| Week 3 | Build knowledge base, chunks, evaluation questions, and retrieval prototype | Complete |
+| Week 1: Project planning | Complete | EGFR therapeutic strategy scope |
+| Week 2: Data source setup | Complete | Public biomedical datasets selected and explored |
+| Week 3: Knowledge base and retrieval prototype | Complete | Merged EGFR knowledge base, retrieval chunks, and ChromaDB evaluation |
 
-Current outputs:
+Later product features such as a public API, user interface, LLM answer generation, and deployment are intentionally outside the current milestone.
 
-```text
-1 target: EGFR
-76 therapy/drug rows
-76 retrieval chunks
-15 retrieval evaluation questions
-15/15 retrieval hits with ChromaDB
-```
+## What The Project Builds
 
-## Scope
-
-This assistant focuses on **Therapeutic Strategy / Drug Repurposing**:
+The pipeline collects EGFR therapy evidence from public biomedical data sources, cleans the data in source-specific notebooks, merges the processed outputs into a single knowledge base, and tests retrieval with ChromaDB.
 
 ```text
-Target -> existing therapies -> mechanisms -> evidence -> confidence signals
+Public biomedical data sources
+        |
+        v
+Exploration and cleaning notebooks
+        |
+        v
+Processed source datasets
+        |
+        v
+Merged EGFR therapy knowledge base
+        |
+        v
+Retrieval-ready evidence chunks
+        |
+        v
+ChromaDB retrieval evaluation
 ```
 
-In scope:
+## Current MVP Summary
 
-- EGFR drug-target relationships
-- Existing therapies linked to EGFR
-- Mechanisms of action
-- Approval / investigational status from ChEMBL `max_phase`
-- Label evidence from openFDA
-- Literature evidence from PubMed
-- Clinical trial evidence from ClinicalTrials.gov
-- Target and disease context from UniProt and Open Targets
-- DrugCentral indication/activity enrichment
-- ChromaDB retrieval prototype
-
-Out of scope for Week 1-3:
-
-- Novel target discovery
-- Patient-specific treatment recommendation
-- FastAPI `/ask` endpoint
-- Streamlit UI
-- LLM-generated answer
-- Docker deployment
-- Production monitoring
+| Item | Current value |
+| --- | --- |
+| Target count | 1 |
+| Target | EGFR |
+| Processed therapy rows | 76 |
+| Retrieval chunks | 76 |
+| Evaluation questions | 15 |
+| Retrieval backend | ChromaDB |
+| Current retrieval result | 15 / 15 hits |
 
 ## Data Sources
 
-The project uses source-specific notebooks to explore, clean, and write processed outputs.
+The knowledge base combines evidence from the following sources:
 
-| Notebook | Source | Purpose |
-| --- | --- | --- |
-| `01_chembl_egfr_exploration.ipynb` | ChEMBL | EGFR target, activity, mechanism, approval phase |
-| `02_pubmed_evidence_exploration.ipynb` | PubMed | Literature evidence for EGFR therapies |
-| `03_clinical_trials_exploration.ipynb` | ClinicalTrials.gov | Clinical trial evidence |
-| `04_openfda_drug_labels_exploration.ipynb` | openFDA | FDA label and indication evidence |
-| `05_dgidb_opentargets_crosscheck.ipynb` | DGIdb + Open Targets | External drug-gene and disease-association cross-check |
-| `06_uniprot_egfr_target_metadata.ipynb` | UniProt | EGFR protein metadata |
-| `07_drugcentral_egfr_indications.ipynb` | DrugCentral | Drug activity and indication enrichment |
-| `08_drugbank_egfr_enrichment.ipynb` | DrugBank | Access/status check only |
+| Source | Role in the project |
+| --- | --- |
+| ChEMBL | EGFR drug-target mechanisms, molecule identifiers, and development phase |
+| DGIdb | Drug-gene interaction cross-checks |
+| Open Targets | EGFR disease-association context |
+| openFDA | FDA label and indication evidence |
+| PubMed | Literature evidence for selected EGFR therapies |
+| ClinicalTrials.gov | Clinical trial evidence and trial phase context |
+| UniProt | EGFR protein metadata |
+| DrugCentral | Drug activity and indication enrichment |
+| DrugBank | Access/status check only; full data is not included because it requires appropriate access and licensing |
 
-DrugBank note: full DrugBank data requires access/licensing, so it is not required for the Week 1-3 MVP. The project continues with public/API-backed sources.
+## Repository Structure
 
-## Pipeline
+Only the directories needed for the current milestone are listed here.
 
-The project uses `uv`, not `requirements.txt`.
+```text
+notebooks/
+  Source-specific exploration and cleaning notebooks.
+
+ingestion/
+  Builds the merged EGFR knowledge base and retrieval chunks.
+
+evaluation/
+  Stores retrieval questions and the ChromaDB retrieval evaluation script.
+
+pyproject.toml
+  Python project metadata and dependencies managed with uv.
+
+uv.lock
+  Locked dependency versions for reproducible setup.
+```
+
+Generated local files are not committed to git:
+
+```text
+data/raw/
+  Raw downloaded or captured source files.
+
+data/processed/
+  Cleaned datasets, merged knowledge base, and retrieval chunks.
+
+chroma_db/
+  Local ChromaDB index created during retrieval evaluation.
+```
+
+## Setup
+
+This project uses `uv` for Python dependency management.
+
+Install `uv` if it is not already installed:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Clone the repository:
+
+```bash
+git clone https://github.com/AI-Precision-Medicine-Zoomcamp/therapeutic-strategy-assistant.git
+cd therapeutic-strategy-assistant
+```
 
 Install dependencies:
 
@@ -88,87 +136,106 @@ Install dependencies:
 uv sync
 ```
 
-The source notebooks write cleaned files into:
+Start Jupyter if you need to regenerate the processed datasets from the notebooks:
+
+```bash
+uv run jupyter lab
+```
+
+## Reproducing The Current Pipeline
+
+The processed data is generated locally and ignored by git. On a fresh clone, run the notebooks first, then run the ingestion and evaluation scripts.
+
+### Step 1: Run the source notebooks
+
+Run the notebooks in this order:
+
+| Order | Notebook | Purpose |
+| --- | --- | --- |
+| 1 | `01_chembl_egfr_exploration.ipynb` | Builds the base EGFR therapy list from ChEMBL |
+| 2 | `02_pubmed_evidence_exploration.ipynb` | Collects PubMed evidence |
+| 3 | `03_clinical_trials_exploration.ipynb` | Collects ClinicalTrials.gov evidence |
+| 4 | `04_openfda_drug_labels_exploration.ipynb` | Collects openFDA label evidence |
+| 5 | `05_dgidb_opentargets_crosscheck.ipynb` | Adds DGIdb and Open Targets cross-checks |
+| 6 | `06_uniprot_egfr_target_metadata.ipynb` | Adds EGFR protein metadata |
+| 7 | `07_drugcentral_egfr_indications.ipynb` | Adds DrugCentral activity and indication evidence |
+| 8 | `08_drugbank_egfr_enrichment.ipynb` | Records DrugBank access/status information |
+
+The notebooks write cleaned outputs into:
 
 ```text
 data/processed/
 ```
 
-The merged knowledge base is built with:
+### Step 2: Build the knowledge base
+
+After the processed notebook outputs exist, run:
 
 ```bash
 uv run python ingestion/index_to_vectordb.py
 ```
 
-That script reads the processed notebook outputs and writes:
+This creates:
 
 ```text
 data/processed/egfr_therapy_knowledge_base.csv
 data/processed/egfr_therapy_knowledge_base_chunks.jsonl
 ```
 
-The retrieval prototype is run with:
+Expected current output:
+
+```text
+Rows: 76
+Chunks: 76
+```
+
+### Step 3: Run retrieval evaluation
+
+Run:
 
 ```bash
 uv run python evaluation/retrieval_eval.py
 ```
 
-That script:
+This script:
 
-1. Reads `egfr_therapy_knowledge_base_chunks.jsonl`
-2. Builds a local ChromaDB collection
-3. Runs 15 evaluation questions
-4. Writes `evaluation/retrieval_results.json`
+1. Reads the retrieval chunks from `data/processed/egfr_therapy_knowledge_base_chunks.jsonl`.
+2. Builds a local ChromaDB collection in `chroma_db/`.
+3. Runs the evaluation questions in `evaluation/retrieval_questions.jsonl`.
+4. Writes the result summary to `evaluation/retrieval_results.json`.
 
-## Key Files
-
-```text
-notebooks/                         Source exploration and cleaning
-ingestion/index_to_vectordb.py     Merged EGFR knowledge-base builder
-evaluation/retrieval_questions.jsonl
-evaluation/retrieval_eval.py
-README.md
-prd.md
-pyproject.toml
-uv.lock
-```
-
-Generated files:
+Expected current result:
 
 ```text
-data/raw/                          Raw snapshots where available
-data/processed/                    Cleaned and merged data
-chroma_db/                         Local ChromaDB retrieval index
-```
-
-`data/`, `chroma_db/`, `prd.md`, and internal weekly team docs are ignored by git.
-
-## Reproduce Week 3
-
-From the project root:
-
-```bash
-uv sync
-uv run python ingestion/index_to_vectordb.py
-uv run python evaluation/retrieval_eval.py
-```
-
-Expected retrieval summary:
-
-```text
-Week 3 ChromaDB retrieval prototype
 Questions: 15
 Hits: 15
 Hit rate: 1.0
 ```
 
-## Data Quality Notes
+## Knowledge Base
 
-The ChEMBL approval-status bug was fixed.
+The final knowledge base stores one row per EGFR therapy candidate.
 
-Before the fix, `max_phase = 4.0` was incorrectly labeled as `Research / Unknown`. The notebook now coerces `max_phase` to a numeric value before assigning approval labels.
+Important columns include:
 
-Current approval-status counts:
+| Column | Description |
+| --- | --- |
+| `target_name` | Target name, currently `EGFR` |
+| `drug_name` | Candidate therapy or drug |
+| `mechanism_of_action` | Mechanism evidence from ChEMBL |
+| `action_type` | Type of interaction where available |
+| `approval_status` | Approved or investigational status derived from ChEMBL `max_phase` |
+| `openfda_label_count` | Number of matching openFDA labels |
+| `pubmed_count` | Number of PubMed evidence records |
+| `clinical_trial_count` | Number of matching clinical trial records |
+| `drugcentral_evidence_score` | DrugCentral activity and indication evidence score |
+| `final_ranking_score` | Combined evidence score used for ordering candidates |
+| `source_references` | Sources supporting the row |
+| `evidence_summary_text` | Text used to create retrieval chunks |
+
+Approval status is normalized from ChEMBL `max_phase`, so values such as `4`, `4.0`, and `"4.0"` are handled consistently.
+
+Current approval-status distribution:
 
 ```text
 Approved                     20
@@ -177,33 +244,55 @@ Investigational (Phase 2)    25
 Investigational (Phase 1)    12
 ```
 
-## How To Explain This Project
+## Retrieval Evaluation
 
-Short version:
-
-```text
-I built the Week 1-3 foundation for a Therapeutic Strategy Assistant.
-It currently supports one target, EGFR.
-The system connects EGFR to known therapies using ChEMBL, DGIdb, Open Targets, openFDA, PubMed, ClinicalTrials.gov, UniProt, and DrugCentral.
-I built a merged 76-row knowledge base, generated 76 retrieval chunks, created 15 evaluation questions, and verified a ChromaDB retrieval prototype with 15/15 hits.
-```
-
-More detailed version:
+The evaluation dataset is stored in:
 
 ```text
-The project does not discover new targets. It starts from an existing target, EGFR, and retrieves evidence for therapies that may act on it.
-
-The data work is organized as separate notebooks, one per source or source group. Each notebook explores and cleans one dataset. The ingestion script then merges the processed outputs into a single application-ready knowledge base.
-
-For Week 3, I added retrieval preparation by converting the merged knowledge base into JSONL evidence chunks and indexing them in ChromaDB. I also created 15 evaluation questions covering drug matching, approval status, FDA labels, PubMed evidence, clinical trials, Open Targets disease context, UniProt target metadata, DrugCentral indication evidence, ranking, and repurposing signals.
+evaluation/retrieval_questions.jsonl
 ```
 
-## Next Stage
+Each evaluation record contains:
 
-Only after Week 3, the next stage is to build the application layer:
+| Field | Description |
+| --- | --- |
+| `question` | The retrieval question |
+| `expected_source` | The source expected to support the answer |
+| `category` | The evidence category being tested |
+
+Example categories include:
 
 ```text
-query input -> retrieve relevant chunks -> show ranked evidence -> later add LLM summary
+Drug Matching
+Approval Status
+Drug Label Evidence
+Clinical Trials
+Literature Evidence
+Mechanism of Action
+Evidence Summary
+Target Metadata
+Ranking
+Evidence Gap
 ```
 
-Do not build FastAPI, Streamlit, Docker, or LLM generation until the weekly plan moves beyond the current Week 1-3 scope.
+The current retrieval score is a functional smoke test for the Week 3 prototype. It confirms that relevant evidence chunks can be retrieved, but it is not a clinical validation metric.
+
+## Current Limitations
+
+- The current knowledge base covers only EGFR.
+- The retrieval prototype runs locally.
+- Generated datasets and vector indexes are not committed to git.
+- DrugBank full data is not included because it requires appropriate access and licensing.
+- The current system retrieves evidence but does not generate final natural-language medical recommendations.
+- This project is not suitable for clinical decision-making.
+
+## Next Development Stage
+
+Recommended next steps after the Week 1 to Week 3 milestone:
+
+1. Add a simple query interface over the ChromaDB retriever.
+2. Add an API endpoint for retrieval requests.
+3. Add grounded answer generation using only retrieved evidence.
+4. Add a lightweight user interface for exploring therapies and evidence.
+5. Add tests around ingestion, retrieval, and ranking behavior.
+6. Extend the pipeline to additional therapeutic targets beyond EGFR.
