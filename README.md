@@ -33,8 +33,9 @@ The current implementation has moved beyond the original EGFR-only proof of conc
 | Chunk generation | Complete |
 | ChromaDB vector indexing | Complete |
 | Multi-target retrieval evaluation | Complete |
-| Prompted LLM answer generation | Next stage |
-| FastAPI / Streamlit UI | Not yet implemented |
+| Prompted LLM answer generation | Complete locally |
+| FastAPI API | Complete locally |
+| Streamlit UI | Complete locally |
 | Monitoring / deployment | Not yet implemented |
 
 Current retrieval result:
@@ -91,10 +92,10 @@ evaluation/
   Retrieval questions, retrieval evaluation script, and saved retrieval results.
 
 app/
-  Placeholder application layer for the upcoming RAG/API stage.
+  Local RAG pipeline, LLM answer service, and FastAPI application.
 
 frontend/
-  Placeholder Streamlit entrypoint for the upcoming UI stage.
+  Streamlit interface for asking questions and inspecting retrieved evidence.
 
 monitoring/
   Placeholder telemetry layer for the upcoming monitoring stage.
@@ -137,6 +138,19 @@ Start Jupyter for notebook execution:
 ```bash
 uv run jupyter lab
 ```
+
+## Environment Variables
+
+Generated LLM answers require an OpenAI API key. Retrieval and evidence inspection still work without a key.
+
+Create a local `.env` file in this project, or place one in a parent folder such as `datatalks/llm/.env` if you want to reuse the same key across related projects.
+
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4.1-mini
+```
+
+The app automatically loads the nearest `.env` file from the project folder or its parent folders. Do not commit `.env`; it is ignored by git.
 
 ## Reproduce The Data Pipeline
 
@@ -212,6 +226,68 @@ Hits: 24
 Hit rate: 1.0
 ```
 
+## Run Local RAG
+
+Ask a question from the command line:
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run python -m app.rag_pipeline \
+  --question "What evidence supports sotorasib as a KRAS therapy?" \
+  --target KRAS \
+  --top-k 3
+```
+
+If `OPENAI_API_KEY` is set, the pipeline returns a generated answer grounded in retrieved evidence. If the key is missing, it returns an evidence-only fallback so retrieval can still be tested.
+
+## Run The API
+
+Start the FastAPI app:
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+Available endpoints:
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /health` | Service health and supported targets |
+| `POST /retrieve` | Retrieve relevant evidence chunks |
+| `POST /ask` | Retrieve evidence and generate a grounded answer |
+
+Example health check:
+
+```bash
+curl http://127.0.0.1:8000/health
+```
+
+## Run The Streamlit UI
+
+Start the UI:
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run streamlit run frontend/streamlit_app.py --server.address 127.0.0.1 --server.port 8501
+```
+
+Open:
+
+```text
+http://127.0.0.1:8501
+```
+
+The UI supports:
+
+```text
+question input
+target filter
+automatic target detection for clear single-target questions
+top-k evidence control
+grounded answer display
+retrieved evidence and metadata display
+optional prompt inspection
+research-only safety notice
+```
+
 ## Current Knowledge Base
 
 The final knowledge base stores one row per target-drug candidate.
@@ -241,21 +317,21 @@ The evidence score is a project-level retrieval ranking signal, not a medical re
 - It does not provide medical advice.
 - It does not recommend treatment for individual patients.
 - It does not claim that a drug cures a disease.
-- Future LLM-generated answers must be grounded only in retrieved evidence and should show source context.
+- LLM-generated answers are designed to use retrieved evidence and show source context.
 
 ## Next Stage
 
 The next development stage is:
 
 ```text
-Prompt engineering + local RAG answer generation
+Answer evaluation and monitoring
 ```
 
 The next implementation should:
 
 ```text
-1. Retrieve relevant chunks from ChromaDB.
-2. Build a grounded prompt using only retrieved evidence.
-3. Generate a research-support answer.
-4. Return the answer with source metadata.
+1. Add answer-level evaluation for groundedness and source use.
+2. Add basic telemetry for questions, retrieved chunks, latency, model, and errors.
+3. Validate Docker and deployment workflow after the local app is stable.
+4. Keep README updated as serving and monitoring mature.
 ```

@@ -4,6 +4,22 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+
+def load_environment() -> None:
+    """Load the nearest .env file from the project or parent folders."""
+    current_path = Path(__file__).resolve()
+    for parent in [current_path.parent, *current_path.parents]:
+        env_path = parent / ".env"
+        if env_path.exists():
+            load_dotenv(env_path, override=False)
+            return
+
+
+load_environment()
 
 
 DEFAULT_MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")

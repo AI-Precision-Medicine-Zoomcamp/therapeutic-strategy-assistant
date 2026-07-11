@@ -32,7 +32,9 @@ def test_retrieve_endpoint_returns_target_filtered_chunks():
     assert payload["retrieved_chunks"][0]["metadata"]["target_symbol"] == "KRAS"
 
 
-def test_ask_endpoint_returns_fallback_without_api_key():
+def test_ask_endpoint_returns_fallback_without_api_key(monkeypatch):
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+
     response = client.post(
         "/ask",
         json={
