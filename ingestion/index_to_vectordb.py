@@ -1,333 +1,183 @@
-"""Build the EGFR therapeutic strategy knowledge base.
+"""Index the multi-target therapeutic strategy chunks into ChromaDB.
 
-This script is the bridge between the exploration notebooks and the app.
-It reads the cleaned CSVs in data/processed, merges evidence by drug, computes
-a simple evidence score, and writes:
+This script is the bridge between the data-preparation notebooks and the
+retrieval/RAG layer. It reads the chunk JSONL created by notebook 16 and builds
+a local ChromaDB collection for semantic search.
 
-- data/processed/egfr_therapy_knowledge_base.csv
-- data/processed/egfr_therapy_knowledge_base_chunks.jsonl
+Input:
+- data/processed/multi_target_therapy_knowledge_base_chunks.jsonl
+
+Output:
+- chroma_db/ local ChromaDB index
 """
 
 from __future__ import annotations
 
+import argparse
 import json
-import re
+import shutil
 from pathlib import Path
-
-import pandas as pd
+from typing import Any
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
+CHROMA_DIR = PROJECT_ROOT / "chroma_db"
 
-TARGET_NAME = "EGFR"
-KNOWLEDGE_BASE_FILE = PROCESSED_DIR / "egfr_therapy_knowledge_base.csv"
-CHUNKS_FILE = PROCESSED_DIR / "egfr_therapy_knowledge_base_chunks.jsonl"
-
-
-def normalize_name(value: object) -> str:
-    """Normalize drug names for joins across biomedical sources."""
-    if pd.isna(value):
-        return ""
-    return re.sub(r"[^A-Z0-9]+", "", str(value).upper())
+DEFAULT_CHUNKS_FILE = PROCESSED_DIR / "multi_target_therapy_knowledge_base_chunks.jsonl"
+DEFAULT_COLLECTION_NAME = "multi_target_therapeutic_strategy"
 
 
-def read_csv(name: str) -> pd.DataFrame:
-    path = PROCESSED_DIR / name
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    """Load JSONL rows from disk."""
     if not path.exists():
-        raise FileNotFoundError(f"Missing required processed dataset: {path}")
-    return pd.read_csv(path)
+        raise FileNotFoundError(f"Missing required chunks file: {path}")
+
+    rows: list[dict[str, Any]] = []
+    with path.open() as f:
+        for line_number, line in enumerate(f, start=1):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"Invalid JSON on line {line_number} in {path}") from exc
+    return rows
 
 
-def safe_join(values: pd.Series, limit: int = 5) -> str:
-    cleaned = [str(value) for value in values if pd.notna(value) and str(value).strip()]
-    return " | ".join(list(dict.fromkeys(cleaned))[:limit])
+def normalize_metadata_value(value: Any) -> str | int | float | bool:
+    """Convert metadata values to Chroma-compatible scalar types."""
+    if value is None:
+        return ""
+    if isinstance(value, (str, int, float, bool)):
+        return value
+    return str(value)
 
 
-def phase_score(value: object) -> float:
+def normalize_metadata(metadata: dict[str, Any]) -> dict[str, str | int | float | bool]:
+    return {key: normalize_metadata_value(value) for key, value in metadata.items()}
+
+
+def validate_chunks(chunks: list[dict[str, Any]]) -> None:
+    if not chunks:
+        raise ValueError("No chunks found. Run notebook 16 before indexing.")
+
+    required_fields = {"id", "text", "metadata"}
+    missing_rows = [index for index, chunk in enumerate(chunks, start=1) if not required_fields.issubset(chunk)]
+    if missing_rows:
+        raise ValueError(f"Chunks missing required fields at rows: {missing_rows[:10]}")
+
+
+def make_unique_ids(chunks: list[dict[str, Any]]) -> list[str]:
+    """Return Chroma-safe unique IDs while preserving the original chunk ID."""
+    seen: dict[str, int] = {}
+    ids: list[str] = []
+
+    for chunk in chunks:
+        original_id = str(chunk["id"])
+        seen[original_id] = seen.get(original_id, 0) + 1
+        if seen[original_id] == 1:
+            ids.append(original_id)
+        else:
+            ids.append(f"{original_id}::dup{seen[original_id]}")
+    return ids
+
+
+def get_chroma_collection(collection_name: str, reset: bool = False):
+    """Create or load the ChromaDB collection."""
     try:
-        phase = float(value)
-    except (TypeError, ValueError):
-        return 0.10
-    if phase >= 4:
-        return 1.00
-    if phase >= 3:
-        return 0.75
-    if phase >= 2:
-        return 0.50
-    if phase >= 1:
-        return 0.25
-    return 0.10
+        import chromadb
+        from chromadb.utils import embedding_functions
+    except ImportError as exc:
+        raise RuntimeError("ChromaDB is required. Run `uv sync` first.") from exc
 
+    if reset and CHROMA_DIR.exists():
+        shutil.rmtree(CHROMA_DIR)
 
-def clinical_score(row: pd.Series) -> float:
-    if row.get("late_phase_trial_count", 0) > 0:
-        return 1.00
-    if row.get("active_trial_count", 0) > 0:
-        return 0.70
-    if row.get("clinical_trial_count", 0) > 0:
-        return 0.40
-    return 0.00
-
-
-def literature_score(value: object) -> float:
-    try:
-        count = int(value)
-    except (TypeError, ValueError):
-        return 0.00
-    if count >= 5:
-        return 1.00
-    if count >= 1:
-        return 0.50
-    return 0.00
-
-
-def evidence_summary(row: pd.Series) -> str:
-    parts = [
-        f"Target: {row['target_name']}",
-        f"Target protein: {row.get('protein_name', '') or 'not available'}",
-        f"Target metadata source: UniProt {row.get('uniprot_accession', '')}",
-        f"Drug: {row['drug_name']}",
-        f"Mechanism: {row.get('mechanism_of_action', '') or 'not available'}",
-        f"Action type: {row.get('action_type', '') or 'not available'}",
-        f"Approval/phase: {row.get('approval_status', '')} (max_phase={row.get('max_phase', '')})",
-        f"ChEMBL evidence: molecule {row.get('molecule_chembl_id', '')}; max_phase {row.get('max_phase', '')}",
-        f"DGIdb evidence: score={row.get('dgidb_interaction_score', 0)}; sources: {row.get('dgidb_sources', '')}",
-        f"openFDA: {row.get('openfda_label_count', 0)} labels; indications: {row.get('openfda_indications', '')}",
-        f"PubMed: {row.get('pubmed_count', 0)} articles; top titles: {row.get('top_pubmed_titles', '')}",
-        (
-            "ClinicalTrials.gov: "
-            f"{row.get('clinical_trial_count', 0)} trials, "
-            f"{row.get('active_trial_count', 0)} active, "
-            f"{row.get('late_phase_trial_count', 0)} late-phase"
-        ),
-        f"DrugCentral: score={row.get('drugcentral_evidence_score', 0)}; indications: {row.get('drugcentral_top_indications', '')}",
-        f"Open Targets context: {row.get('opentargets_top_diseases', '')}",
-        f"Final evidence score: {row.get('final_ranking_score', 0):.3f}",
-        f"Source references: {row.get('source_references', '')}",
-    ]
-    return "\n".join(str(part) for part in parts)
-
-
-def build_knowledge_base() -> pd.DataFrame:
-    base = read_csv("egfr_drug_recommendations.csv").copy()
-    base["target_name"] = TARGET_NAME
-    base["normalised_drug_name"] = base["drug_name"].apply(normalize_name)
-
-    dgidb = read_csv("egfr_dgidb_interactions.csv").copy()
-    dgidb_grouped = (
-        dgidb.groupby("normalised_drug_name", dropna=False)
-        .agg(
-            dgidb_interaction_score=("interaction_score", "max"),
-            dgidb_sources=("sources", safe_join),
-            dgidb_interaction_types=("interaction_types", safe_join),
-            dgidb_matches_project_drug=("matches_project_drug", "max"),
-        )
-        .reset_index()
+    client = chromadb.PersistentClient(path=str(CHROMA_DIR))
+    embedding_function = embedding_functions.DefaultEmbeddingFunction()
+    return client.get_or_create_collection(
+        name=collection_name,
+        embedding_function=embedding_function,
+        metadata={"description": "Multi-target therapeutic strategy evidence chunks"},
     )
 
-    openfda = read_csv("egfr_openfda_summary.csv").copy()
-    openfda["normalised_drug_name"] = openfda["drug_name"].apply(normalize_name)
-    openfda = openfda.rename(columns={"top_indications": "openfda_indications"})
 
-    pubmed = read_csv("egfr_pubmed_summary.csv").copy()
-    pubmed["normalised_drug_name"] = pubmed["drug_name"].apply(normalize_name)
+def index_chunks(
+    chunks_file: Path = DEFAULT_CHUNKS_FILE,
+    collection_name: str = DEFAULT_COLLECTION_NAME,
+    reset: bool = True,
+):
+    """Load chunk JSONL and index it into ChromaDB."""
+    chunks = load_jsonl(chunks_file)
+    validate_chunks(chunks)
 
-    trials = read_csv("egfr_clinical_trials_summary.csv").copy()
-    trials["normalised_drug_name"] = trials["drug_name"].apply(normalize_name)
+    collection = get_chroma_collection(collection_name=collection_name, reset=reset)
 
-    drugcentral = read_csv("egfr_drugcentral_summary.csv").copy()
-    drugcentral["normalised_drug_name"] = drugcentral["drugcentral_name"].apply(normalize_name)
-    drugcentral = drugcentral.rename(columns={"top_indications": "drugcentral_top_indications"})
+    ids = make_unique_ids(chunks)
+    documents = [str(chunk["text"]) for chunk in chunks]
+    metadatas = []
+    for chunk in chunks:
+        metadata = normalize_metadata(chunk.get("metadata", {}))
+        metadata["original_chunk_id"] = str(chunk["id"])
+        metadatas.append(metadata)
 
-    uniprot = read_csv("egfr_uniprot_target_metadata.csv").iloc[0].to_dict()
-    external = read_csv("egfr_external_crosscheck_summary.csv").iloc[0].to_dict()
-
-    kb = base.merge(dgidb_grouped, on="normalised_drug_name", how="left")
-    kb = kb.merge(
-        openfda[
-            [
-                "normalised_drug_name",
-                "openfda_label_count",
-                "mentions_target_in_label",
-                "brand_names",
-                "generic_names",
-                "openfda_indications",
-                "has_openfda_label",
-                "openfda_evidence_score",
-            ]
-        ],
-        on="normalised_drug_name",
-        how="left",
-    )
-    kb = kb.merge(
-        pubmed[["normalised_drug_name", "pubmed_count", "top_pubmed_titles"]],
-        on="normalised_drug_name",
-        how="left",
-    )
-    kb = kb.merge(
-        trials[
-            [
-                "normalised_drug_name",
-                "clinical_trial_count",
-                "active_trial_count",
-                "late_phase_trial_count",
-                "top_trial_titles",
-                "clinical_evidence_score",
-            ]
-        ],
-        on="normalised_drug_name",
-        how="left",
-    )
-    kb = kb.merge(
-        drugcentral[
-            [
-                "normalised_drug_name",
-                "struct_id",
-                "drugcentral_name",
-                "activity_count",
-                "indication_count",
-                "drugcentral_top_indications",
-                "has_drugcentral_indication",
-                "drugcentral_evidence_score",
-            ]
-        ],
-        on="normalised_drug_name",
-        how="left",
-    )
-
-    fill_zero_columns = [
-        "dgidb_interaction_score",
-        "openfda_label_count",
-        "openfda_evidence_score",
-        "pubmed_count",
-        "clinical_trial_count",
-        "active_trial_count",
-        "late_phase_trial_count",
-        "clinical_evidence_score",
-        "activity_count",
-        "indication_count",
-        "drugcentral_evidence_score",
-    ]
-    for column in fill_zero_columns:
-        if column in kb.columns:
-            kb[column] = kb[column].fillna(0)
-
-    for column in kb.columns:
-        if kb[column].dtype == object:
-            kb[column] = kb[column].fillna("")
-
-    kb["drug_target_score"] = kb.apply(
-        lambda row: max(
-            1.0 if str(row.get("mechanism_of_action", "")).strip() else 0.0,
-            min(float(row.get("dgidb_interaction_score", 0) or 0), 1.0),
-            1.0 if row.get("activity_count", 0) > 0 else 0.0,
-        ),
-        axis=1,
-    )
-    kb["approval_or_phase_score"] = kb["max_phase"].apply(phase_score)
-    kb["clinical_score"] = kb.apply(clinical_score, axis=1)
-    kb["literature_score"] = kb["pubmed_count"].apply(literature_score)
-    kb["external_crosscheck_score"] = float(external.get("external_crosscheck_score", 0) or 0)
-    kb["opentargets_top_diseases"] = external.get("top_opentargets_diseases", "")
-    kb["uniprot_accession"] = uniprot.get("uniprot_accession", "")
-    kb["protein_name"] = uniprot.get("protein_name", "")
-
-    kb["final_ranking_score"] = (
-        0.25 * kb["drug_target_score"]
-        + 0.15 * kb["approval_or_phase_score"]
-        + 0.15 * kb["openfda_evidence_score"]
-        + 0.15 * kb["clinical_score"]
-        + 0.10 * kb["literature_score"]
-        + 0.10 * kb["drugcentral_evidence_score"]
-        + 0.10 * kb["external_crosscheck_score"]
-    ).round(4)
-
-    kb["source_references"] = kb.apply(
-        lambda row: " | ".join(
-            source
-            for source, present in [
-                ("ChEMBL", bool(str(row.get("molecule_chembl_id", "")).strip())),
-                ("DGIdb", row.get("dgidb_interaction_score", 0) > 0),
-                ("openFDA", row.get("openfda_label_count", 0) > 0),
-                ("PubMed", row.get("pubmed_count", 0) > 0),
-                ("ClinicalTrials.gov", row.get("clinical_trial_count", 0) > 0),
-                ("DrugCentral", row.get("activity_count", 0) > 0),
-                ("Open Targets", bool(row.get("opentargets_top_diseases", ""))),
-                ("UniProt", bool(row.get("uniprot_accession", ""))),
-            ]
-            if present
-        ),
-        axis=1,
-    )
-    kb["evidence_summary_text"] = kb.apply(evidence_summary, axis=1)
-
-    output_columns = [
-        "target_name",
-        "drug_name",
-        "molecule_chembl_id",
-        "action_type",
-        "mechanism_of_action",
-        "approval_status",
-        "max_phase",
-        "drug_target_score",
-        "approval_or_phase_score",
-        "openfda_evidence_score",
-        "clinical_score",
-        "literature_score",
-        "drugcentral_evidence_score",
-        "external_crosscheck_score",
-        "final_ranking_score",
-        "dgidb_interaction_score",
-        "dgidb_sources",
-        "openfda_label_count",
-        "openfda_indications",
-        "pubmed_count",
-        "top_pubmed_titles",
-        "clinical_trial_count",
-        "active_trial_count",
-        "late_phase_trial_count",
-        "top_trial_titles",
-        "struct_id",
-        "drugcentral_name",
-        "drugcentral_top_indications",
-        "uniprot_accession",
-        "protein_name",
-        "opentargets_top_diseases",
-        "source_references",
-        "evidence_summary_text",
-    ]
-    output_columns = [column for column in output_columns if column in kb.columns]
-    return kb[output_columns].sort_values("final_ranking_score", ascending=False).reset_index(drop=True)
+    # Chroma can insert all 207 chunks in one call, keeping this simple and readable.
+    collection.add(ids=ids, documents=documents, metadatas=metadatas)
+    return collection, chunks
 
 
-def write_chunks(kb: pd.DataFrame) -> None:
-    with CHUNKS_FILE.open("w") as f:
-        for index, row in kb.iterrows():
-            chunk = {
-                "id": f"{TARGET_NAME.lower()}-{index + 1:03d}-{normalize_name(row['drug_name']).lower()}",
-                "text": row["evidence_summary_text"],
-                "metadata": {
-                    "target_name": row["target_name"],
-                    "drug_name": row["drug_name"],
-                    "final_ranking_score": float(row["final_ranking_score"]),
-                    "sources": row["source_references"],
-                },
-            }
-            f.write(json.dumps(chunk) + "\n")
+def query_collection(
+    question: str,
+    collection_name: str = DEFAULT_COLLECTION_NAME,
+    top_k: int = 5,
+    target_symbol: str | None = None,
+) -> dict[str, Any]:
+    """Query an already-built ChromaDB collection."""
+    collection = get_chroma_collection(collection_name=collection_name, reset=False)
+    where = {"target_symbol": target_symbol} if target_symbol else None
+    return collection.query(query_texts=[question], n_results=top_k, where=where)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Index multi-target therapy chunks into ChromaDB.")
+    parser.add_argument("--chunks-file", type=Path, default=DEFAULT_CHUNKS_FILE)
+    parser.add_argument("--collection-name", default=DEFAULT_COLLECTION_NAME)
+    parser.add_argument("--no-reset", action="store_true", help="Append to existing collection instead of rebuilding chroma_db/.")
+    parser.add_argument("--smoke-query", default="Which approved therapies target EGFR?")
+    parser.add_argument("--top-k", type=int, default=5)
+    return parser.parse_args()
 
 
 def main() -> None:
-    kb = build_knowledge_base()
-    kb.to_csv(KNOWLEDGE_BASE_FILE, index=False)
-    write_chunks(kb)
+    args = parse_args()
+    collection, chunks = index_chunks(
+        chunks_file=args.chunks_file,
+        collection_name=args.collection_name,
+        reset=not args.no_reset,
+    )
 
-    print("EGFR therapeutic strategy knowledge base built")
+    targets = sorted({chunk.get("metadata", {}).get("target_symbol", "") for chunk in chunks})
+    targets = [target for target in targets if target]
+
+    print("Multi-target ChromaDB index built")
     print("=" * 70)
-    print("Rows:", len(kb))
-    print("Knowledge base:", KNOWLEDGE_BASE_FILE)
-    print("Chunks:", CHUNKS_FILE)
-    print(kb[["drug_name", "final_ranking_score", "source_references"]].head(10).to_string(index=False))
+    print("Chunks indexed:", len(chunks))
+    print("Collection:", args.collection_name)
+    print("Chroma path:", CHROMA_DIR)
+    print("Targets:", ", ".join(targets))
+
+    response = collection.query(query_texts=[args.smoke_query], n_results=args.top_k)
+    print()
+    print("Smoke query:", args.smoke_query)
+    for rank, metadata in enumerate(response["metadatas"][0], start=1):
+        print(
+            f"{rank}. {metadata.get('target_symbol', '')} | "
+            f"{metadata.get('drug_name', '')} | "
+            f"score={metadata.get('evidence_score', '')} | "
+            f"strength={metadata.get('evidence_strength', '')}"
+        )
 
 
 if __name__ == "__main__":

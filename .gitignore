@@ -32,6 +32,7 @@ data/processed/
 *.csv
 *.json
 !evaluation/retrieval_results.json
+!evaluation/retrieval_results_multi_target.json
 *.parquet
 *.db
 *.sqlite3
@@ -47,7 +48,5 @@ Thumbs.db
 .vscode/
 .idea/
 
-# ===== Markdown — hide ALL .md except README.md =====
-# Keeps planning docs (prd.md, docs/*.md) private; only README.md is published.
 *.md
 !README.md
