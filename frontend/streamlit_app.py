@@ -16,6 +16,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from app.rag_pipeline import SUPPORTED_TARGETS, answer_question  # noqa: E402
+from monitoring.telemetry import log_feedback, log_interaction  # noqa: E402
 
 
 TARGET_DISPLAY_NAMES = {
@@ -243,6 +244,15 @@ def render_answer(response: Any) -> None:
     with col_c:
         st.caption(f"Target filter: {response.target_filter or 'all'}")
 
+    st.caption(f"Conversation ID: {response.conversation_id}")
+    st.caption(f"Response time: {response.response_time:.2f}s")
+    st.caption(
+        f"Tokens: {response.total_tokens} total "
+        f"({response.prompt_tokens} prompt, {response.completion_tokens} completion)"
+    )
+    st.caption(f"Estimated cost: ${response.estimated_cost_usd:.6f}")
+    st.caption(f"Evaluation: {response.evaluation.relevance} - {response.evaluation.explanation}")
+
 
 def render_prompt(response: Any) -> None:
     st.subheader("Generated Prompt")
@@ -253,6 +263,27 @@ def render_prompt(response: Any) -> None:
         st.code(system_prompt, language="text")
     with st.expander("User prompt"):
         st.code(user_prompt, language="text")
+
+
+def render_feedback(conversation_id: str) -> None:
+    st.subheader("Feedback")
+    col_up, col_down = st.columns(2)
+
+    with col_up:
+        if st.button("Helpful (+1)", key=f"feedback-up-{conversation_id}"):
+            try:
+                log_feedback(conversation_id=conversation_id, rating=1, source="streamlit")
+                st.success("Feedback saved.")
+            except Exception as exc:
+                st.error(f"Unable to save feedback: {exc}")
+
+    with col_down:
+        if st.button("Not helpful (-1)", key=f"feedback-down-{conversation_id}"):
+            try:
+                log_feedback(conversation_id=conversation_id, rating=-1, source="streamlit")
+                st.success("Feedback saved.")
+            except Exception as exc:
+                st.error(f"Unable to save feedback: {exc}")
 
 
 def main() -> None:
@@ -285,7 +316,12 @@ def main() -> None:
             st.error(f"Unable to answer the question: {exc}")
             return
 
-    answer_tab, evidence_tab, prompt_tab = st.tabs(["Answer", "Evidence", "Prompt"])
+    try:
+        log_interaction(response, source="streamlit")
+    except Exception as exc:
+        st.warning(f"Answer generated, but the database record could not be saved: {exc}")
+
+    answer_tab, evidence_tab, prompt_tab, feedback_tab = st.tabs(["Answer", "Evidence", "Prompt", "Feedback"])
     with answer_tab:
         render_answer(response)
     with evidence_tab:
@@ -295,6 +331,8 @@ def main() -> None:
             render_prompt(response)
         else:
             st.caption("Enable 'Show generated prompt' in the sidebar to inspect the prompt.")
+    with feedback_tab:
+        render_feedback(response.conversation_id)
 
 
 if __name__ == "__main__":

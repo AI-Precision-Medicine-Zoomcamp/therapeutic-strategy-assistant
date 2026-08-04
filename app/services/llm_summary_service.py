@@ -25,6 +25,13 @@ load_environment()
 DEFAULT_MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
 
 
+def estimate_openai_cost(prompt_tokens: int, completion_tokens: int) -> float:
+    """Estimate cost when token prices are configured through environment variables."""
+    input_price = float(os.getenv("OPENAI_INPUT_PRICE_PER_1M", "0") or 0)
+    output_price = float(os.getenv("OPENAI_OUTPUT_PRICE_PER_1M", "0") or 0)
+    return ((prompt_tokens / 1_000_000) * input_price) + ((completion_tokens / 1_000_000) * output_price)
+
+
 @dataclass(frozen=True)
 class LLMAnswer:
     """Response from the answer-generation layer."""
@@ -32,6 +39,10 @@ class LLMAnswer:
     answer: str
     model: str
     used_llm: bool
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    total_tokens: int = 0
+    estimated_cost_usd: float = 0.0
 
 
 class LLMSummaryService:
@@ -73,4 +84,16 @@ class LLMSummaryService:
             temperature=0.1,
         )
         answer = response.choices[0].message.content or ""
-        return LLMAnswer(answer=answer.strip(), model=self.model, used_llm=True)
+        usage = response.usage
+        prompt_tokens = usage.prompt_tokens if usage else 0
+        completion_tokens = usage.completion_tokens if usage else 0
+        total_tokens = usage.total_tokens if usage else prompt_tokens + completion_tokens
+        return LLMAnswer(
+            answer=answer.strip(),
+            model=self.model,
+            used_llm=True,
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+            total_tokens=total_tokens,
+            estimated_cost_usd=estimate_openai_cost(prompt_tokens, completion_tokens),
+        )

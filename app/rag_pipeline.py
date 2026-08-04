@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
+import time
+import uuid
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -16,6 +17,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from app.services.llm_summary_service import LLMSummaryService  # noqa: E402
+from app.services.evaluation_service import AnswerEvaluation, evaluate_answer  # noqa: E402
 from ingestion.index_to_vectordb import (  # noqa: E402
     DEFAULT_COLLECTION_NAME,
     get_chroma_collection,
@@ -53,6 +55,7 @@ class RetrievedChunk:
 class RAGResponse:
     """Complete local RAG response."""
 
+    conversation_id: str
     question: str
     answer: str
     model: str
@@ -60,10 +63,12 @@ class RAGResponse:
     target_filter: str | None
     retrieved_chunks: list[RetrievedChunk]
     prompt: dict[str, str]
-
-
-def normalize_text(value: object) -> str:
-    return re.sub(r"[^a-z0-9]+", " ", str(value).lower()).strip()
+    response_time: float
+    prompt_tokens: int
+    completion_tokens: int
+    total_tokens: int
+    estimated_cost_usd: float
+    evaluation: AnswerEvaluation
 
 
 def load_prompt_block(name: str, default: str) -> str:
@@ -118,29 +123,6 @@ def ensure_collection(collection_name: str = DEFAULT_COLLECTION_NAME):
     return collection
 
 
-def extract_named_drugs(question: str, metadatas: list[dict[str, Any]]) -> set[str]:
-    normalized_question = normalize_text(question)
-    names = set()
-    for metadata in metadatas:
-        drug_name = str(metadata.get("drug_name", ""))
-        if drug_name and normalize_text(drug_name) in normalized_question:
-            names.add(normalize_text(drug_name))
-    return names
-
-
-def rerank_named_drugs(question: str, chunks: list[RetrievedChunk]) -> list[RetrievedChunk]:
-    named_drugs = extract_named_drugs(question, [chunk.metadata for chunk in chunks])
-    if not named_drugs:
-        return chunks
-
-    def rank_key(chunk: RetrievedChunk) -> tuple[int, float]:
-        drug_name = normalize_text(chunk.metadata.get("drug_name", ""))
-        exact_match = drug_name in named_drugs
-        return (0 if exact_match else 1, chunk.distance if chunk.distance is not None else 999.0)
-
-    return sorted(chunks, key=rank_key)
-
-
 def retrieve_chunks(
     question: str,
     target_symbol: str | None = None,
@@ -163,7 +145,6 @@ def retrieve_chunks(
         RetrievedChunk(id=chunk_id, text=text, metadata=metadata, distance=distance)
         for chunk_id, text, metadata, distance in zip(ids, documents, metadatas, distances, strict=False)
     ]
-    chunks = rerank_named_drugs(question, chunks)
     return chunks[:top_k]
 
 
@@ -228,6 +209,7 @@ def answer_question(
     collection_name: str = DEFAULT_COLLECTION_NAME,
 ) -> RAGResponse:
     """Retrieve context and generate a grounded answer."""
+    started_at = time.perf_counter()
     chunks = retrieve_chunks(
         question=question,
         target_symbol=target_symbol,
@@ -241,7 +223,16 @@ def answer_question(
     if not llm_answer.used_llm:
         answer = fallback_evidence_answer(question, chunks, llm_answer.answer)
 
+    evaluation = evaluate_answer(
+        question=question,
+        answer=answer,
+        chunks=chunks,
+        used_llm=llm_answer.used_llm,
+    )
+    response_time = time.perf_counter() - started_at
+
     return RAGResponse(
+        conversation_id=str(uuid.uuid4()),
         question=question,
         answer=answer,
         model=llm_answer.model,
@@ -249,6 +240,12 @@ def answer_question(
         target_filter=validate_target(target_symbol),
         retrieved_chunks=chunks,
         prompt=prompts,
+        response_time=response_time,
+        prompt_tokens=llm_answer.prompt_tokens,
+        completion_tokens=llm_answer.completion_tokens,
+        total_tokens=llm_answer.total_tokens,
+        estimated_cost_usd=llm_answer.estimated_cost_usd + evaluation.estimated_cost_usd,
+        evaluation=evaluation,
     )
 
 

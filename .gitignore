@@ -17,6 +17,7 @@ __pycache__/
 # .venv is machine-specific and huge; recreate it with `uv sync`.
 # uv.lock and pyproject.toml ARE committed so the env is reproducible.
 .venv/
+.uv-cache/
 venv/
 env/
 
@@ -33,11 +34,15 @@ data/processed/
 *.json
 !evaluation/retrieval_results.json
 !evaluation/retrieval_results_multi_target.json
+!monitoring/grafana/dashboards/*.json
 *.parquet
 *.db
 *.sqlite3
 chroma_db/
 faq.db
+
+# ===== Local monitoring output =====
+monitoring/logs/
 
 # ===== Internal team coordination docs =====
 weekly update from team/

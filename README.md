@@ -34,9 +34,11 @@ The current implementation has moved beyond the original EGFR-only proof of conc
 | ChromaDB vector indexing | Complete |
 | Multi-target retrieval evaluation | Complete |
 | Prompted LLM answer generation | Complete locally |
+| Answer evaluation | Complete with LLM-as-a-judge labels |
 | FastAPI API | Complete locally |
 | Streamlit UI | Complete locally |
-| Monitoring / deployment | Not yet implemented |
+| Monitoring / feedback logging | Complete with PostgreSQL conversations and feedback tables |
+| Docker Compose deployment | Complete for API, Streamlit, PostgreSQL, and Grafana |
 
 Current retrieval result:
 
@@ -98,7 +100,7 @@ frontend/
   Streamlit interface for asking questions and inspecting retrieved evidence.
 
 monitoring/
-  Placeholder telemetry layer for the upcoming monitoring stage.
+  PostgreSQL monitoring helpers and Grafana dashboard provisioning.
 
 pyproject.toml
   Python project metadata and dependencies managed with uv.
@@ -148,9 +150,26 @@ Create a local `.env` file in this project, or place one in a parent folder such
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
 OPENAI_MODEL=gpt-4.1-mini
+ANSWER_EVALUATION_MODE=llm
+OPENAI_INPUT_PRICE_PER_1M=0
+OPENAI_OUTPUT_PRICE_PER_1M=0
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5433
+POSTGRES_DB=therapeutic_strategy
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password
 ```
 
 The app automatically loads the nearest `.env` file from the project folder or its parent folders. Do not commit `.env`; it is ignored by git.
+
+`ANSWER_EVALUATION_MODE` supports:
+
+| Value | Meaning |
+| --- | --- |
+| `llm` | Default. Uses an LLM-as-a-judge when `OPENAI_API_KEY` is configured. |
+| `off` | Skips answer evaluation. |
+
+The token price variables are optional. Keep them at `0` if you do not want local cost estimates.
 
 ## Reproduce The Data Pipeline
 
@@ -198,6 +217,16 @@ Chunks indexed: 207
 Targets: ALK, BRAF, EGFR, ERBB2, KRAS, MET, PIK3CA, VEGFA
 ```
 
+### Vector Store Choice
+
+This capstone uses ChromaDB as the local vector store for the biomedical evidence chunks. The core flow still follows the course pattern:
+
+```text
+chunks -> vector index -> retrieve top-k evidence -> build prompt -> generate grounded answer
+```
+
+ChromaDB is a project-specific choice for this capstone. A comparison with the exact vector-search stack used in the course can be added later if needed.
+
 ## Run Retrieval Evaluation
 
 Run the multi-target retrieval evaluation:
@@ -241,6 +270,13 @@ If `OPENAI_API_KEY` is set, the pipeline returns a generated answer grounded in 
 
 ## Run The API
 
+Start PostgreSQL and initialize the monitoring tables:
+
+```bash
+docker compose up -d postgres
+make db-init
+```
+
 Start the FastAPI app:
 
 ```bash
@@ -254,11 +290,28 @@ Available endpoints:
 | `GET /health` | Service health and supported targets |
 | `POST /retrieve` | Retrieve relevant evidence chunks |
 | `POST /ask` | Retrieve evidence and generate a grounded answer |
+| `POST /feedback` | Save user feedback for a conversation |
 
 Example health check:
 
 ```bash
 curl http://127.0.0.1:8000/health
+```
+
+Example question:
+
+```bash
+curl -X POST http://127.0.0.1:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question": "What evidence supports sotorasib as a KRAS therapy?", "target_symbol": "KRAS", "top_k": 3}'
+```
+
+Example feedback:
+
+```bash
+curl -X POST http://127.0.0.1:8000/feedback \
+  -H "Content-Type: application/json" \
+  -d '{"conversation_id": "replace-with-response-conversation-id", "rating": 1, "comment": "Useful answer"}'
 ```
 
 ## Run The Streamlit UI
@@ -285,7 +338,89 @@ top-k evidence control
 grounded answer display
 retrieved evidence and metadata display
 optional prompt inspection
+response time, token usage, cost estimate, and answer evaluation display
+feedback buttons
 research-only safety notice
+```
+
+## Monitoring
+
+The app follows the course monitoring pattern and writes interaction data into PostgreSQL.
+
+```text
+conversations
+feedback
+```
+
+Each interaction records:
+
+```text
+conversation_id
+question and answer
+retrieved chunk IDs
+model and LLM mode
+response time
+prompt, completion, and total tokens
+estimated cost
+answer evaluation label and explanation
+```
+
+Initialize the local database tables:
+
+```bash
+make db-init
+```
+
+Inspect the monitoring summary:
+
+```bash
+make db-summary
+```
+
+The Grafana dashboard reads from the same PostgreSQL tables.
+
+## Run With Docker Compose
+
+The Docker setup runs the same pieces used in the course monitoring flow:
+
+```text
+PostgreSQL
+FastAPI
+Streamlit
+Grafana
+```
+
+Start all services:
+
+```bash
+docker compose up --build
+```
+
+Open:
+
+```text
+FastAPI docs: http://127.0.0.1:8000/docs
+Streamlit UI: http://127.0.0.1:8501
+Grafana: http://127.0.0.1:3000
+```
+
+Default local Grafana login:
+
+```text
+Username: admin
+Password: admin
+```
+
+The dashboard is provisioned automatically from:
+
+```text
+monitoring/grafana/dashboards/therapeutic-strategy-dashboard.json
+```
+
+Stop:
+
+```bash
+docker compose down
 ```
 
 ## Current Knowledge Base
@@ -321,17 +456,10 @@ The evidence score is a project-level retrieval ranking signal, not a medical re
 
 ## Next Stage
 
-The next development stage is:
+The current capstone implementation now covers local RAG, LLM-as-a-judge evaluation, API serving, feedback, PostgreSQL monitoring, Streamlit, Grafana, and Docker Compose. Good next refinements to discuss before adding are:
 
 ```text
-Answer evaluation and monitoring
-```
-
-The next implementation should:
-
-```text
-1. Add answer-level evaluation for groundedness and source use.
-2. Add basic telemetry for questions, retrieved chunks, latency, model, and errors.
-3. Validate Docker and deployment workflow after the local app is stable.
-4. Keep README updated as serving and monitoring mature.
+1. Add deployment-specific documentation for the final hosting target.
+2. Expand answer evaluation with a curated biomedical judge dataset.
+3. Compare ChromaDB with the exact vector-search stack used in the course.
 ```

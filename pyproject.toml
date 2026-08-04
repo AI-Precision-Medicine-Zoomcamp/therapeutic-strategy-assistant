@@ -1,7 +1,7 @@
 [project]
 name = "therapeutic-strategy-assistant"
 version = "0.1.0"
-description = "Add your description here"
+description = "Evidence-grounded therapeutic strategy retrieval assistant for biomedical research support"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -9,6 +9,7 @@ dependencies = [
     "fastapi>=0.138.0",
     "openai>=2.43.0",
     "pandas>=3.0.3",
+    "psycopg[binary]>=3.2.0",
     "pydantic>=2.13.4",
     "pytest>=9.1.1",
     "python-dotenv>=1.2.2",

@@ -1,0 +1,16 @@
+apiVersion: 1
+
+datasources:
+  - name: Therapeutic Strategy Postgres
+    uid: therapeutic-postgres
+    type: postgres
+    access: proxy
+    url: postgres:5432
+    database: therapeutic_strategy
+    user: user
+    secureJsonData:
+      password: password
+    jsonData:
+      sslmode: disable
+      postgresVersion: 1600
+      timescaledb: false
