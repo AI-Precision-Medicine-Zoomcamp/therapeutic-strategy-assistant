@@ -1,7 +1,10 @@
 {
-  "chunks_file": "/Users/daniel/Documents/Projects/AI  Engineering Tools/datatalks/llm/ai-precision-medicine-lab/therapeutic-strategy-assistant/data/processed/multi_target_therapy_knowledge_base_chunks.jsonl",
+  "approach_name": "chroma_target_filter_rerank",
+  "chunks_file": "data/processed/multi_target_therapy_knowledge_base_chunks.jsonl",
   "collection_name": "multi_target_therapeutic_strategy",
+  "top_k": 10,
   "use_target_filter": true,
+  "rerank_named_drugs": true,
   "indexed_chunk_count": 207,
   "indexed_targets": [
     "ALK",
@@ -16,6 +19,7 @@
   "question_count": 24,
   "hit_count": 24,
   "hit_rate": 1.0,
+  "mrr": 1.0,
   "hits_by_target": {
     "ALK": {
       "question_count": 3,
@@ -73,6 +77,8 @@
         "target_symbol": "ALK"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::ALK::CHEMBL3286830::LORLATINIB",
         "multi_target::ALK::CHEMBL4650298::PLB1003",
@@ -134,6 +140,8 @@
         "target_symbol": "ALK"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::ALK::CHEMBL2403108::CERITINIB",
         "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
@@ -197,6 +205,8 @@
         "target_symbol": "ALK"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::ALK::CHEMBL3286830::LORLATINIB",
         "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
@@ -260,6 +270,8 @@
         "target_symbol": "BRAF"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
         "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
@@ -321,6 +333,8 @@
         "target_symbol": "BRAF"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
         "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
@@ -384,6 +398,8 @@
         "target_symbol": "BRAF"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
         "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
@@ -447,16 +463,18 @@
         "target_symbol": "EGFR"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
         "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
         "multi_target::EGFR::CHEMBL939::GEFITINIB",
-        "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
-        "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
         "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
         "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE",
-        "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS",
         "multi_target::EGFR::CHEMBL4650319::MOBOCERTINIB",
+        "multi_target::EGFR::CHEMBL1743047::NECITUMUMAB",
+        "multi_target::EGFR::CHEMBL180022::NERATINIB",
+        "multi_target::EGFR::CHEMBL3786343::OLMUTINIB",
         "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB"
       ],
       "top_targets": [
@@ -475,12 +493,12 @@
         "AMIVANTAMAB",
         "CETUXIMAB",
         "GEFITINIB",
-        "BRIGATINIB",
-        "DACOMITINIB",
         "ERLOTINIB HYDROCHLORIDE",
         "AFATINIB DIMALEATE",
-        "DACOMITINIB ANHYDROUS",
         "MOBOCERTINIB",
+        "NECITUMUMAB",
+        "NERATINIB",
+        "OLMUTINIB",
         "OSIMERTINIB"
       ],
       "top_distances": [
@@ -508,16 +526,18 @@
         "target_symbol": "EGFR"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::EGFR::CHEMBL939::GEFITINIB",
         "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
         "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
-        "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
-        "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
         "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
         "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE",
-        "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS",
         "multi_target::EGFR::CHEMBL4650319::MOBOCERTINIB",
+        "multi_target::EGFR::CHEMBL1743047::NECITUMUMAB",
+        "multi_target::EGFR::CHEMBL180022::NERATINIB",
+        "multi_target::EGFR::CHEMBL3786343::OLMUTINIB",
         "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB"
       ],
       "top_targets": [
@@ -536,12 +556,12 @@
         "GEFITINIB",
         "AMIVANTAMAB",
         "CETUXIMAB",
-        "BRIGATINIB",
-        "DACOMITINIB",
         "ERLOTINIB HYDROCHLORIDE",
         "AFATINIB DIMALEATE",
-        "DACOMITINIB ANHYDROUS",
         "MOBOCERTINIB",
+        "NECITUMUMAB",
+        "NERATINIB",
+        "OLMUTINIB",
         "OSIMERTINIB"
       ],
       "top_distances": [
@@ -571,16 +591,18 @@
         "target_symbol": "EGFR"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
         "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
         "multi_target::EGFR::CHEMBL939::GEFITINIB",
-        "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
-        "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
         "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
         "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE",
-        "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS",
         "multi_target::EGFR::CHEMBL4650319::MOBOCERTINIB",
+        "multi_target::EGFR::CHEMBL1743047::NECITUMUMAB",
+        "multi_target::EGFR::CHEMBL180022::NERATINIB",
+        "multi_target::EGFR::CHEMBL3786343::OLMUTINIB",
         "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB"
       ],
       "top_targets": [
@@ -599,12 +621,12 @@
         "AMIVANTAMAB",
         "CETUXIMAB",
         "GEFITINIB",
-        "BRIGATINIB",
-        "DACOMITINIB",
         "ERLOTINIB HYDROCHLORIDE",
         "AFATINIB DIMALEATE",
-        "DACOMITINIB ANHYDROUS",
         "MOBOCERTINIB",
+        "NECITUMUMAB",
+        "NERATINIB",
+        "OLMUTINIB",
         "OSIMERTINIB"
       ],
       "top_distances": [
@@ -634,6 +656,8 @@
         "target_symbol": "ERBB2"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
         "multi_target::ERBB2::CHEMBL587723::AEE788",
@@ -695,6 +719,8 @@
         "target_symbol": "ERBB2"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::ERBB2::CHEMBL180022::NERATINIB",
         "multi_target::ERBB2::CHEMBL3989921::NERATINIBMALEATE",
@@ -758,6 +784,8 @@
         "target_symbol": "ERBB2"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
         "multi_target::ERBB2::CHEMBL6067986::AV412",
@@ -820,6 +848,8 @@
         "target_symbol": "KRAS"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::KRAS::CHEMBL4594350::ADAGRASIB",
         "multi_target::KRAS::CHEMBL4535757::SOTORASIB"
@@ -849,6 +879,8 @@
         "target_symbol": "KRAS"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::KRAS::CHEMBL4535757::SOTORASIB",
         "multi_target::KRAS::CHEMBL4594350::ADAGRASIB"
@@ -879,6 +911,8 @@
         "target_symbol": "KRAS"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::KRAS::CHEMBL4594350::ADAGRASIB",
         "multi_target::KRAS::CHEMBL4535757::SOTORASIB"
@@ -910,6 +944,8 @@
         "target_symbol": "MET"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
         "multi_target::MET::CHEMBL4594292::TEPOTINIBHYDROCHLORIDE",
@@ -971,6 +1007,8 @@
         "target_symbol": "MET"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::MET::CHEMBL3188267::CAPMATINIB",
         "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
@@ -1034,6 +1072,8 @@
         "target_symbol": "MET"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
         "multi_target::MET::CHEMBL2103868::CABOZANTINIBSMALATE",
@@ -1097,6 +1137,8 @@
         "target_symbol": "PIK3CA"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
         "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
@@ -1154,6 +1196,8 @@
         "target_symbol": "PIK3CA"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
         "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
@@ -1213,6 +1257,8 @@
         "target_symbol": "PIK3CA"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
         "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
@@ -1272,6 +1318,8 @@
         "target_symbol": "VEGFA"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::VEGFA::CHEMBL2108752::PEGAPTANIBOCTASODIUM",
         "multi_target::VEGFA::CHEMBL4297163::MUPARFOSTAT",
@@ -1333,6 +1381,8 @@
         "target_symbol": "VEGFA"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::VEGFA::CHEMBL1201583::BEVACIZUMAB",
         "multi_target::VEGFA::CHEMBL5314727::BEVACIZUMABGAMMA",
@@ -1396,6 +1446,8 @@
         "target_symbol": "VEGFA"
       },
       "hit": true,
+      "rank": 1,
+      "reciprocal_rank": 1.0,
       "top_ids": [
         "multi_target::VEGFA::CHEMBL1201421::PEGAPTANIBSODIUM",
         "multi_target::VEGFA::CHEMBL2108752::PEGAPTANIBOCTASODIUM",

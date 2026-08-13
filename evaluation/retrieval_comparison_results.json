@@ -1,0 +1,4773 @@
+{
+  "best_approach": "chroma_target_filter_rerank_top5",
+  "approaches": [
+    {
+      "approach_name": "chroma_top5",
+      "chunks_file": "data/processed/multi_target_therapy_knowledge_base_chunks.jsonl",
+      "collection_name": "multi_target_therapeutic_strategy",
+      "top_k": 5,
+      "use_target_filter": false,
+      "rerank_named_drugs": false,
+      "indexed_chunk_count": 207,
+      "indexed_targets": [
+        "ALK",
+        "BRAF",
+        "EGFR",
+        "ERBB2",
+        "KRAS",
+        "MET",
+        "PIK3CA",
+        "VEGFA"
+      ],
+      "question_count": 24,
+      "hit_count": 16,
+      "hit_rate": 0.6666666666666666,
+      "mrr": 0.625,
+      "hits_by_target": {
+        "ALK": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "BRAF": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "EGFR": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "ERBB2": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "KRAS": {
+          "question_count": 3,
+          "hit_count": 1,
+          "hit_rate": 0.3333333333333333
+        },
+        "MET": {
+          "question_count": 3,
+          "hit_count": 1,
+          "hit_rate": 0.3333333333333333
+        },
+        "PIK3CA": {
+          "question_count": 3,
+          "hit_count": 1,
+          "hit_rate": 0.3333333333333333
+        },
+        "VEGFA": {
+          "question_count": 3,
+          "hit_count": 1,
+          "hit_rate": 0.3333333333333333
+        }
+      },
+      "results": [
+        {
+          "question": "Which approved therapies target ALK?",
+          "expected_target": "ALK",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "CERITINIB",
+            "CRIZOTINIB",
+            "LORLATINIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL4650298::PLB1003",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL4113131::ENSARTINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "LORLATINIB",
+            "PLB1003",
+            "CRIZOTINIB",
+            "ENSARTINIB",
+            "BRIGATINIB"
+          ],
+          "top_distances": [
+            0.8407217264175415,
+            0.8456727266311646,
+            0.8461694717407227,
+            0.8471777439117432,
+            0.8504112362861633
+          ]
+        },
+        {
+          "question": "What evidence supports ceritinib as an ALK therapy?",
+          "expected_target": "ALK",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "CERITINIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL2403108::CERITINIB",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL3951811::CEP37440"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "CERITINIB",
+            "CRIZOTINIB",
+            "BRIGATINIB",
+            "LORLATINIB",
+            "CEP-37440"
+          ],
+          "top_distances": [
+            0.9059245586395264,
+            0.9285658597946167,
+            0.93438720703125,
+            0.9378681182861328,
+            0.9385551810264587
+          ]
+        },
+        {
+          "question": "Which ALK therapies have clinical trial evidence?",
+          "expected_target": "ALK",
+          "expected_source": "ClinicalTrials.gov",
+          "category": "Clinical Trials",
+          "expected_drugs": [
+            "ALECTINIB HYDROCHLORIDE",
+            "BRIGATINIB",
+            "CERITINIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
+            "multi_target::ALK::CHEMBL4113131::ENSARTINIB",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL3707320::ALECTINIBHYDROCHLORIDE"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "LORLATINIB",
+            "BRIGATINIB",
+            "ENSARTINIB",
+            "CRIZOTINIB",
+            "ALECTINIB HYDROCHLORIDE"
+          ],
+          "top_distances": [
+            1.0016733407974243,
+            1.0038347244262695,
+            1.003993272781372,
+            1.0080665349960327,
+            1.010203242301941
+          ]
+        },
+        {
+          "question": "Which approved therapies target BRAF?",
+          "expected_target": "BRAF",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "ENCORAFENIB",
+            "REGORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE",
+            "DABRAFENIB MESYLATE"
+          ],
+          "top_distances": [
+            1.0097507238388062,
+            1.015334963798523,
+            1.0248076915740967,
+            1.0284030437469482,
+            1.0334804058074951
+          ]
+        },
+        {
+          "question": "What evidence supports encorafenib as a BRAF therapy?",
+          "expected_target": "BRAF",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "ENCORAFENIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE",
+            "REGORAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "top_distances": [
+            0.949809193611145,
+            1.0844130516052246,
+            1.0934767723083496,
+            1.0957307815551758,
+            1.1275928020477295
+          ]
+        },
+        {
+          "question": "Which BRAF drugs have FDA label evidence?",
+          "expected_target": "BRAF",
+          "expected_source": "openFDA",
+          "category": "Drug Label Evidence",
+          "expected_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL4303729::PLIXORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "REGORAFENIB",
+            "VEMURAFENIB",
+            "ENCORAFENIB",
+            "PLIXORAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "top_distances": [
+            1.0691077709197998,
+            1.080054521560669,
+            1.0880460739135742,
+            1.1020565032958984,
+            1.1054863929748535
+          ]
+        },
+        {
+          "question": "Which approved therapies target EGFR?",
+          "expected_target": "EGFR",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "GEFITINIB",
+            "CETUXIMAB",
+            "AMIVANTAMAB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "DACOMITINIB",
+            "ERLOTINIB HYDROCHLORIDE"
+          ],
+          "top_distances": [
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349
+          ]
+        },
+        {
+          "question": "What evidence supports gefitinib as an EGFR therapy?",
+          "expected_target": "EGFR",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "GEFITINIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "DACOMITINIB",
+            "ERLOTINIB HYDROCHLORIDE"
+          ],
+          "top_distances": [
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197
+          ]
+        },
+        {
+          "question": "What diseases are associated with EGFR in Open Targets?",
+          "expected_target": "EGFR",
+          "expected_source": "Open Targets",
+          "category": "Target-Disease Context",
+          "expected_drugs": [
+            "GEFITINIB",
+            "CETUXIMAB",
+            "AMIVANTAMAB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "DACOMITINIB",
+            "ERLOTINIB HYDROCHLORIDE"
+          ],
+          "top_distances": [
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879
+          ]
+        },
+        {
+          "question": "Which HER2 or ERBB2 therapies are approved?",
+          "expected_target": "ERBB2",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "NERATINIB",
+            "MARGETUXIMAB",
+            "LAPATINIB DITOSYLATE"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL587723::AEE788",
+            "multi_target::ERBB2::CHEMBL2007641::PERTUZUMAB",
+            "multi_target::ERBB2::CHEMBL1645462::AC480",
+            "multi_target::ERBB2::CHEMBL2364649::MARGETUXIMAB"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "HEMAY-022",
+            "AEE-788",
+            "PERTUZUMAB",
+            "AC-480",
+            "MARGETUXIMAB"
+          ],
+          "top_distances": [
+            1.0643792152404785,
+            1.083207368850708,
+            1.0933725833892822,
+            1.0938825607299805,
+            1.0943524837493896
+          ]
+        },
+        {
+          "question": "What evidence supports neratinib as a HER2 ERBB2 therapy?",
+          "expected_target": "ERBB2",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "NERATINIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL180022::NERATINIB",
+            "multi_target::ERBB2::CHEMBL3989921::NERATINIBMALEATE",
+            "multi_target::ERBB2::CHEMBL3989868::TUCATINIB",
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL3545396::BMS690514"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "NERATINIB",
+            "NERATINIB MALEATE",
+            "TUCATINIB",
+            "HEMAY-022",
+            "BMS-690514"
+          ],
+          "top_distances": [
+            0.958694338798523,
+            0.9705737233161926,
+            0.9867212772369385,
+            0.9930525422096252,
+            1.0069386959075928
+          ]
+        },
+        {
+          "question": "Which ERBB2 therapies have PubMed literature evidence?",
+          "expected_target": "ERBB2",
+          "expected_source": "PubMed",
+          "category": "Literature Evidence",
+          "expected_drugs": [
+            "MARGETUXIMAB",
+            "NERATINIB",
+            "DACOMITINIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL6067986::AV412",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::ERBB2::CHEMBL587723::AEE788",
+            "multi_target::ERBB2::CHEMBL3989868::TUCATINIB"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "BRAF",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "HEMAY-022",
+            "AV-412",
+            "VEMURAFENIB",
+            "AEE-788",
+            "TUCATINIB"
+          ],
+          "top_distances": [
+            1.1463704109191895,
+            1.152794599533081,
+            1.1547691822052002,
+            1.1571130752563477,
+            1.1593244075775146
+          ]
+        },
+        {
+          "question": "Which approved therapies target KRAS?",
+          "expected_target": "KRAS",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "target_filter": null,
+          "hit": false,
+          "rank": null,
+          "reciprocal_rank": 0.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL4303729::PLIXORAFENIB",
+            "multi_target::BRAF::CHEMBL3545263::LGX806",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "ENCORAFENIB",
+            "PLIXORAFENIB",
+            "LGX-806",
+            "DABRAFENIB MESYLATE",
+            "REGORAFENIB"
+          ],
+          "top_distances": [
+            1.2241175174713135,
+            1.2349475622177124,
+            1.2378944158554077,
+            1.2444437742233276,
+            1.245247721672058
+          ]
+        },
+        {
+          "question": "What evidence supports sotorasib as a KRAS therapy?",
+          "expected_target": "KRAS",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "SOTORASIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE"
+          ],
+          "top_targets": [
+            "KRAS",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "SOTORASIB",
+            "REGORAFENIB",
+            "ENCORAFENIB",
+            "DABRAFENIB MESYLATE",
+            "SORAFENIB TOSYLATE"
+          ],
+          "top_distances": [
+            1.4672555923461914,
+            1.484719157218933,
+            1.4879302978515625,
+            1.489174485206604,
+            1.4971996545791626
+          ]
+        },
+        {
+          "question": "Which KRAS drugs have clinical trial evidence?",
+          "expected_target": "KRAS",
+          "expected_source": "ClinicalTrials.gov",
+          "category": "Clinical Trials",
+          "expected_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "target_filter": null,
+          "hit": false,
+          "rank": null,
+          "reciprocal_rank": 0.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL4303729::PLIXORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE",
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "REGORAFENIB",
+            "PLIXORAFENIB",
+            "DABRAFENIB MESYLATE",
+            "ENCORAFENIB",
+            "VEMURAFENIB"
+          ],
+          "top_distances": [
+            1.2523797750473022,
+            1.2622586488723755,
+            1.2818684577941895,
+            1.2839643955230713,
+            1.286358118057251
+          ]
+        },
+        {
+          "question": "Which approved therapies target MET?",
+          "expected_target": "MET",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "CAPMATINIB",
+            "TEPOTINIB",
+            "CRIZOTINIB"
+          ],
+          "target_filter": null,
+          "hit": false,
+          "rank": null,
+          "reciprocal_rank": 0.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "DABRAFENIB MESYLATE",
+            "REGORAFENIB",
+            "ENCORAFENIB",
+            "SORAFENIB TOSYLATE",
+            "VEMURAFENIB"
+          ],
+          "top_distances": [
+            1.1708717346191406,
+            1.1760412454605103,
+            1.1997766494750977,
+            1.2028875350952148,
+            1.2029460668563843
+          ]
+        },
+        {
+          "question": "What evidence supports capmatinib as a MET therapy?",
+          "expected_target": "MET",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "CAPMATINIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL3188267::CAPMATINIB",
+            "multi_target::MET::CHEMBL2103868::CABOZANTINIBSMALATE",
+            "multi_target::MET::CHEMBL4461070::SAR125844",
+            "multi_target::MET::CHEMBL3990032::TELISOTUZUMABVEDOTIN"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB HYDROCHLORIDE",
+            "CAPMATINIB",
+            "CABOZANTINIB S-MALATE",
+            "SAR-125844",
+            "TELISOTUZUMAB VEDOTIN"
+          ],
+          "top_distances": [
+            1.2504816055297852,
+            1.293649435043335,
+            1.382085919380188,
+            1.3872979879379272,
+            1.3880112171173096
+          ]
+        },
+        {
+          "question": "Which MET therapies have DrugCentral indication evidence?",
+          "expected_target": "MET",
+          "expected_source": "DrugCentral",
+          "category": "Indication Evidence",
+          "expected_drugs": [
+            "CAPMATINIB",
+            "TEPOTINIB",
+            "CRIZOTINIB"
+          ],
+          "target_filter": null,
+          "hit": false,
+          "rank": null,
+          "reciprocal_rank": 0.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL4303729::PLIXORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "REGORAFENIB",
+            "PLIXORAFENIB",
+            "DABRAFENIB MESYLATE",
+            "VEMURAFENIB",
+            "ENCORAFENIB"
+          ],
+          "top_distances": [
+            1.191645860671997,
+            1.2017483711242676,
+            1.20332670211792,
+            1.210164189338684,
+            1.2238273620605469
+          ]
+        },
+        {
+          "question": "Which approved therapies target PIK3CA?",
+          "expected_target": "PIK3CA",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "INAVOLISIB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB"
+          ],
+          "top_distances": [
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756
+          ]
+        },
+        {
+          "question": "What evidence supports alpelisib as a PIK3CA therapy?",
+          "expected_target": "PIK3CA",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "ALPELISIB"
+          ],
+          "target_filter": null,
+          "hit": false,
+          "rank": null,
+          "reciprocal_rank": 0.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL4650298::PLB1003",
+            "multi_target::ALK::CHEMBL2403108::CERITINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "LORLATINIB",
+            "CRIZOTINIB",
+            "PLB1003",
+            "CERITINIB",
+            "BRIGATINIB"
+          ],
+          "top_distances": [
+            0.9470233917236328,
+            0.9534833431243896,
+            0.9607516527175903,
+            0.9673517942428589,
+            0.9708803296089172
+          ]
+        },
+        {
+          "question": "Which PIK3CA therapies have FDA label evidence?",
+          "expected_target": "PIK3CA",
+          "expected_source": "openFDA",
+          "category": "Drug Label Evidence",
+          "expected_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "INAVOLISIB"
+          ],
+          "target_filter": null,
+          "hit": false,
+          "rank": null,
+          "reciprocal_rank": 0.0,
+          "top_ids": [
+            "multi_target::MET::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::MET::CHEMBL3039525::GOLVATINIB",
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL3545419::TELISOTUZUMAB",
+            "multi_target::MET::CHEMBL4594472::BAFISONTAMAB"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GOLVATINIB",
+            "CAPMATINIB HYDROCHLORIDE",
+            "TELISOTUZUMAB",
+            "BAFISONTAMAB"
+          ],
+          "top_distances": [
+            1.1432950496673584,
+            1.1463496685028076,
+            1.1490246057510376,
+            1.1490881443023682,
+            1.1523594856262207
+          ]
+        },
+        {
+          "question": "Which approved therapies target VEGFA?",
+          "expected_target": "VEGFA",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "AFLIBERCEPT",
+            "BEVACIZUMAB",
+            "RANIBIZUMAB"
+          ],
+          "target_filter": null,
+          "hit": false,
+          "rank": null,
+          "reciprocal_rank": 0.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "DACOMITINIB",
+            "ERLOTINIB HYDROCHLORIDE"
+          ],
+          "top_distances": [
+            0.9954734444618225,
+            0.9954734444618225,
+            0.9954734444618225,
+            0.9954734444618225,
+            0.9954734444618225
+          ]
+        },
+        {
+          "question": "What evidence supports bevacizumab as a VEGFA therapy?",
+          "expected_target": "VEGFA",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "BEVACIZUMAB"
+          ],
+          "target_filter": null,
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL1201583::BEVACIZUMAB",
+            "multi_target::VEGFA::CHEMBL5314727::BEVACIZUMABGAMMA",
+            "multi_target::VEGFA::CHEMBL3707253::BEVACIZUMAB111IN",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL4297750::FARICIMAB"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "BEVACIZUMAB",
+            "BEVACIZUMAB GAMMA",
+            "BEVACIZUMAB 111IN",
+            "VANUCIZUMAB",
+            "FARICIMAB"
+          ],
+          "top_distances": [
+            0.982512891292572,
+            0.9841148853302002,
+            0.9984773993492126,
+            1.0220930576324463,
+            1.0494184494018555
+          ]
+        },
+        {
+          "question": "Which VEGFA therapies have DrugCentral indication evidence?",
+          "expected_target": "VEGFA",
+          "expected_source": "DrugCentral",
+          "category": "Indication Evidence",
+          "expected_drugs": [
+            "AFLIBERCEPT",
+            "BEVACIZUMAB",
+            "RANIBIZUMAB"
+          ],
+          "target_filter": null,
+          "hit": false,
+          "rank": null,
+          "reciprocal_rank": 0.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "DACOMITINIB",
+            "ERLOTINIB HYDROCHLORIDE"
+          ],
+          "top_distances": [
+            0.9596445560455322,
+            0.9596445560455322,
+            0.9596445560455322,
+            0.9596445560455322,
+            0.9596445560455322
+          ]
+        }
+      ]
+    },
+    {
+      "approach_name": "chroma_target_filter_top5",
+      "chunks_file": "data/processed/multi_target_therapy_knowledge_base_chunks.jsonl",
+      "collection_name": "multi_target_therapeutic_strategy",
+      "top_k": 5,
+      "use_target_filter": true,
+      "rerank_named_drugs": false,
+      "indexed_chunk_count": 207,
+      "indexed_targets": [
+        "ALK",
+        "BRAF",
+        "EGFR",
+        "ERBB2",
+        "KRAS",
+        "MET",
+        "PIK3CA",
+        "VEGFA"
+      ],
+      "question_count": 24,
+      "hit_count": 24,
+      "hit_rate": 1.0,
+      "mrr": 0.9583333333333334,
+      "hits_by_target": {
+        "ALK": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "BRAF": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "EGFR": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "ERBB2": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "KRAS": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "MET": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "PIK3CA": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "VEGFA": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        }
+      },
+      "results": [
+        {
+          "question": "Which approved therapies target ALK?",
+          "expected_target": "ALK",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "CERITINIB",
+            "CRIZOTINIB",
+            "LORLATINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ALK"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL4650298::PLB1003",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL4113131::ENSARTINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "LORLATINIB",
+            "PLB1003",
+            "CRIZOTINIB",
+            "ENSARTINIB",
+            "BRIGATINIB"
+          ],
+          "top_distances": [
+            0.8407217264175415,
+            0.8456727266311646,
+            0.8461694717407227,
+            0.8471777439117432,
+            0.8504112362861633
+          ]
+        },
+        {
+          "question": "What evidence supports ceritinib as an ALK therapy?",
+          "expected_target": "ALK",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "CERITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ALK"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL2403108::CERITINIB",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL3951811::CEP37440"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "CERITINIB",
+            "CRIZOTINIB",
+            "BRIGATINIB",
+            "LORLATINIB",
+            "CEP-37440"
+          ],
+          "top_distances": [
+            0.9059245586395264,
+            0.9285658597946167,
+            0.93438720703125,
+            0.9378681182861328,
+            0.9385551810264587
+          ]
+        },
+        {
+          "question": "Which ALK therapies have clinical trial evidence?",
+          "expected_target": "ALK",
+          "expected_source": "ClinicalTrials.gov",
+          "category": "Clinical Trials",
+          "expected_drugs": [
+            "ALECTINIB HYDROCHLORIDE",
+            "BRIGATINIB",
+            "CERITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ALK"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
+            "multi_target::ALK::CHEMBL4113131::ENSARTINIB",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL3707320::ALECTINIBHYDROCHLORIDE"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "LORLATINIB",
+            "BRIGATINIB",
+            "ENSARTINIB",
+            "CRIZOTINIB",
+            "ALECTINIB HYDROCHLORIDE"
+          ],
+          "top_distances": [
+            1.0016733407974243,
+            1.0038347244262695,
+            1.003993272781372,
+            1.0080665349960327,
+            1.010203242301941
+          ]
+        },
+        {
+          "question": "Which approved therapies target BRAF?",
+          "expected_target": "BRAF",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "target_filter": {
+            "target_symbol": "BRAF"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "ENCORAFENIB",
+            "REGORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE",
+            "DABRAFENIB MESYLATE"
+          ],
+          "top_distances": [
+            1.0097507238388062,
+            1.015334963798523,
+            1.0248076915740967,
+            1.0284030437469482,
+            1.0334804058074951
+          ]
+        },
+        {
+          "question": "What evidence supports encorafenib as a BRAF therapy?",
+          "expected_target": "BRAF",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "ENCORAFENIB"
+          ],
+          "target_filter": {
+            "target_symbol": "BRAF"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE",
+            "REGORAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "top_distances": [
+            0.949809193611145,
+            1.0844130516052246,
+            1.0934767723083496,
+            1.0957307815551758,
+            1.1275928020477295
+          ]
+        },
+        {
+          "question": "Which BRAF drugs have FDA label evidence?",
+          "expected_target": "BRAF",
+          "expected_source": "openFDA",
+          "category": "Drug Label Evidence",
+          "expected_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE"
+          ],
+          "target_filter": {
+            "target_symbol": "BRAF"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL4303729::PLIXORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "REGORAFENIB",
+            "VEMURAFENIB",
+            "ENCORAFENIB",
+            "PLIXORAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "top_distances": [
+            1.0691077709197998,
+            1.080054521560669,
+            1.0880460739135742,
+            1.1020565032958984,
+            1.1054863929748535
+          ]
+        },
+        {
+          "question": "Which approved therapies target EGFR?",
+          "expected_target": "EGFR",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "GEFITINIB",
+            "CETUXIMAB",
+            "AMIVANTAMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "EGFR"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "ERLOTINIB HYDROCHLORIDE",
+            "AFATINIB DIMALEATE"
+          ],
+          "top_distances": [
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349
+          ]
+        },
+        {
+          "question": "What evidence supports gefitinib as an EGFR therapy?",
+          "expected_target": "EGFR",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "GEFITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "EGFR"
+          },
+          "hit": true,
+          "rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "ERLOTINIB HYDROCHLORIDE",
+            "AFATINIB DIMALEATE"
+          ],
+          "top_distances": [
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197
+          ]
+        },
+        {
+          "question": "What diseases are associated with EGFR in Open Targets?",
+          "expected_target": "EGFR",
+          "expected_source": "Open Targets",
+          "category": "Target-Disease Context",
+          "expected_drugs": [
+            "GEFITINIB",
+            "CETUXIMAB",
+            "AMIVANTAMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "EGFR"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "ERLOTINIB HYDROCHLORIDE",
+            "AFATINIB DIMALEATE"
+          ],
+          "top_distances": [
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879
+          ]
+        },
+        {
+          "question": "Which HER2 or ERBB2 therapies are approved?",
+          "expected_target": "ERBB2",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "NERATINIB",
+            "MARGETUXIMAB",
+            "LAPATINIB DITOSYLATE"
+          ],
+          "target_filter": {
+            "target_symbol": "ERBB2"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL587723::AEE788",
+            "multi_target::ERBB2::CHEMBL2007641::PERTUZUMAB",
+            "multi_target::ERBB2::CHEMBL1645462::AC480",
+            "multi_target::ERBB2::CHEMBL2364649::MARGETUXIMAB"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "HEMAY-022",
+            "AEE-788",
+            "PERTUZUMAB",
+            "AC-480",
+            "MARGETUXIMAB"
+          ],
+          "top_distances": [
+            1.0643792152404785,
+            1.083207368850708,
+            1.0933725833892822,
+            1.0938825607299805,
+            1.0943524837493896
+          ]
+        },
+        {
+          "question": "What evidence supports neratinib as a HER2 ERBB2 therapy?",
+          "expected_target": "ERBB2",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "NERATINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ERBB2"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL180022::NERATINIB",
+            "multi_target::ERBB2::CHEMBL3989921::NERATINIBMALEATE",
+            "multi_target::ERBB2::CHEMBL3989868::TUCATINIB",
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL3545396::BMS690514"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "NERATINIB",
+            "NERATINIB MALEATE",
+            "TUCATINIB",
+            "HEMAY-022",
+            "BMS-690514"
+          ],
+          "top_distances": [
+            0.958694338798523,
+            0.9705737233161926,
+            0.9867212772369385,
+            0.9930525422096252,
+            1.0069386959075928
+          ]
+        },
+        {
+          "question": "Which ERBB2 therapies have PubMed literature evidence?",
+          "expected_target": "ERBB2",
+          "expected_source": "PubMed",
+          "category": "Literature Evidence",
+          "expected_drugs": [
+            "MARGETUXIMAB",
+            "NERATINIB",
+            "DACOMITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ERBB2"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL6067986::AV412",
+            "multi_target::ERBB2::CHEMBL587723::AEE788",
+            "multi_target::ERBB2::CHEMBL3989868::TUCATINIB",
+            "multi_target::ERBB2::CHEMBL1947204::ALLITINIB"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "HEMAY-022",
+            "AV-412",
+            "AEE-788",
+            "TUCATINIB",
+            "ALLITINIB"
+          ],
+          "top_distances": [
+            1.1463704109191895,
+            1.152794599533081,
+            1.1571130752563477,
+            1.1593244075775146,
+            1.1641921997070312
+          ]
+        },
+        {
+          "question": "Which approved therapies target KRAS?",
+          "expected_target": "KRAS",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "target_filter": {
+            "target_symbol": "KRAS"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4594350::ADAGRASIB",
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB"
+          ],
+          "top_targets": [
+            "KRAS",
+            "KRAS"
+          ],
+          "top_drugs": [
+            "ADAGRASIB",
+            "SOTORASIB"
+          ],
+          "top_distances": [
+            1.2859859466552734,
+            1.292781114578247
+          ]
+        },
+        {
+          "question": "What evidence supports sotorasib as a KRAS therapy?",
+          "expected_target": "KRAS",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "SOTORASIB"
+          ],
+          "target_filter": {
+            "target_symbol": "KRAS"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB",
+            "multi_target::KRAS::CHEMBL4594350::ADAGRASIB"
+          ],
+          "top_targets": [
+            "KRAS",
+            "KRAS"
+          ],
+          "top_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "top_distances": [
+            1.4672555923461914,
+            1.5240670442581177
+          ]
+        },
+        {
+          "question": "Which KRAS drugs have clinical trial evidence?",
+          "expected_target": "KRAS",
+          "expected_source": "ClinicalTrials.gov",
+          "category": "Clinical Trials",
+          "expected_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "target_filter": {
+            "target_symbol": "KRAS"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4594350::ADAGRASIB",
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB"
+          ],
+          "top_targets": [
+            "KRAS",
+            "KRAS"
+          ],
+          "top_drugs": [
+            "ADAGRASIB",
+            "SOTORASIB"
+          ],
+          "top_distances": [
+            1.4814419746398926,
+            1.4887440204620361
+          ]
+        },
+        {
+          "question": "Which approved therapies target MET?",
+          "expected_target": "MET",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "CAPMATINIB",
+            "TEPOTINIB",
+            "CRIZOTINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "MET"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL4594292::TEPOTINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::MET::CHEMBL3545299::BMS698769",
+            "multi_target::MET::CHEMBL3301578::EMIBETUZUMAB"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB HYDROCHLORIDE",
+            "TEPOTINIB HYDROCHLORIDE",
+            "AMIVANTAMAB",
+            "BMS-698769",
+            "EMIBETUZUMAB"
+          ],
+          "top_distances": [
+            1.3946681022644043,
+            1.4154127836227417,
+            1.4190428256988525,
+            1.4213533401489258,
+            1.4225953817367554
+          ]
+        },
+        {
+          "question": "What evidence supports capmatinib as a MET therapy?",
+          "expected_target": "MET",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "CAPMATINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "MET"
+          },
+          "hit": true,
+          "rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL3188267::CAPMATINIB",
+            "multi_target::MET::CHEMBL2103868::CABOZANTINIBSMALATE",
+            "multi_target::MET::CHEMBL4461070::SAR125844",
+            "multi_target::MET::CHEMBL3990032::TELISOTUZUMABVEDOTIN"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB HYDROCHLORIDE",
+            "CAPMATINIB",
+            "CABOZANTINIB S-MALATE",
+            "SAR-125844",
+            "TELISOTUZUMAB VEDOTIN"
+          ],
+          "top_distances": [
+            1.2504816055297852,
+            1.293649435043335,
+            1.382085919380188,
+            1.3872979879379272,
+            1.3880112171173096
+          ]
+        },
+        {
+          "question": "Which MET therapies have DrugCentral indication evidence?",
+          "expected_target": "MET",
+          "expected_source": "DrugCentral",
+          "category": "Indication Evidence",
+          "expected_drugs": [
+            "CAPMATINIB",
+            "TEPOTINIB",
+            "CRIZOTINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "MET"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL2103868::CABOZANTINIBSMALATE",
+            "multi_target::MET::CHEMBL4594292::TEPOTINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL4594472::BAFISONTAMAB",
+            "multi_target::MET::CHEMBL4650326::TEREVALEFIM"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB HYDROCHLORIDE",
+            "CABOZANTINIB S-MALATE",
+            "TEPOTINIB HYDROCHLORIDE",
+            "BAFISONTAMAB",
+            "TEREVALEFIM"
+          ],
+          "top_distances": [
+            1.4293224811553955,
+            1.4428136348724365,
+            1.4485963582992554,
+            1.4544589519500732,
+            1.4563944339752197
+          ]
+        },
+        {
+          "question": "Which approved therapies target PIK3CA?",
+          "expected_target": "PIK3CA",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "INAVOLISIB"
+          ],
+          "target_filter": {
+            "target_symbol": "PIK3CA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB"
+          ],
+          "top_distances": [
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756
+          ]
+        },
+        {
+          "question": "What evidence supports alpelisib as a PIK3CA therapy?",
+          "expected_target": "PIK3CA",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "ALPELISIB"
+          ],
+          "target_filter": {
+            "target_symbol": "PIK3CA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB"
+          ],
+          "top_distances": [
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458
+          ]
+        },
+        {
+          "question": "Which PIK3CA therapies have FDA label evidence?",
+          "expected_target": "PIK3CA",
+          "expected_source": "openFDA",
+          "category": "Drug Label Evidence",
+          "expected_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "INAVOLISIB"
+          ],
+          "target_filter": {
+            "target_symbol": "PIK3CA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB"
+          ],
+          "top_distances": [
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065
+          ]
+        },
+        {
+          "question": "Which approved therapies target VEGFA?",
+          "expected_target": "VEGFA",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "AFLIBERCEPT",
+            "BEVACIZUMAB",
+            "RANIBIZUMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "VEGFA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL2108752::PEGAPTANIBOCTASODIUM",
+            "multi_target::VEGFA::CHEMBL4297163::MUPARFOSTAT",
+            "multi_target::VEGFA::CHEMBL4297684::ABICIPARPEGOL",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL5314727::BEVACIZUMABGAMMA"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "PEGAPTANIB OCTASODIUM",
+            "MUPARFOSTAT",
+            "ABICIPAR PEGOL",
+            "VANUCIZUMAB",
+            "BEVACIZUMAB GAMMA"
+          ],
+          "top_distances": [
+            0.9989075660705566,
+            1.0020265579223633,
+            1.0074398517608643,
+            1.0079307556152344,
+            1.0128509998321533
+          ]
+        },
+        {
+          "question": "What evidence supports bevacizumab as a VEGFA therapy?",
+          "expected_target": "VEGFA",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "BEVACIZUMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "VEGFA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL1201583::BEVACIZUMAB",
+            "multi_target::VEGFA::CHEMBL5314727::BEVACIZUMABGAMMA",
+            "multi_target::VEGFA::CHEMBL3707253::BEVACIZUMAB111IN",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL4297750::FARICIMAB"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "BEVACIZUMAB",
+            "BEVACIZUMAB GAMMA",
+            "BEVACIZUMAB 111IN",
+            "VANUCIZUMAB",
+            "FARICIMAB"
+          ],
+          "top_distances": [
+            0.982512891292572,
+            0.9841148853302002,
+            0.9984773993492126,
+            1.0220930576324463,
+            1.0494184494018555
+          ]
+        },
+        {
+          "question": "Which VEGFA therapies have DrugCentral indication evidence?",
+          "expected_target": "VEGFA",
+          "expected_source": "DrugCentral",
+          "category": "Indication Evidence",
+          "expected_drugs": [
+            "AFLIBERCEPT",
+            "BEVACIZUMAB",
+            "RANIBIZUMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "VEGFA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL1201421::PEGAPTANIBSODIUM",
+            "multi_target::VEGFA::CHEMBL2108752::PEGAPTANIBOCTASODIUM",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL4297684::ABICIPARPEGOL",
+            "multi_target::VEGFA::CHEMBL4297163::MUPARFOSTAT"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "PEGAPTANIB SODIUM",
+            "PEGAPTANIB OCTASODIUM",
+            "VANUCIZUMAB",
+            "ABICIPAR PEGOL",
+            "MUPARFOSTAT"
+          ],
+          "top_distances": [
+            0.9914204478263855,
+            0.9943888187408447,
+            1.0037171840667725,
+            1.004213809967041,
+            1.0052061080932617
+          ]
+        }
+      ]
+    },
+    {
+      "approach_name": "chroma_target_filter_rerank_top5",
+      "chunks_file": "data/processed/multi_target_therapy_knowledge_base_chunks.jsonl",
+      "collection_name": "multi_target_therapeutic_strategy",
+      "top_k": 5,
+      "use_target_filter": true,
+      "rerank_named_drugs": true,
+      "indexed_chunk_count": 207,
+      "indexed_targets": [
+        "ALK",
+        "BRAF",
+        "EGFR",
+        "ERBB2",
+        "KRAS",
+        "MET",
+        "PIK3CA",
+        "VEGFA"
+      ],
+      "question_count": 24,
+      "hit_count": 24,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "hits_by_target": {
+        "ALK": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "BRAF": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "EGFR": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "ERBB2": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "KRAS": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "MET": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "PIK3CA": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "VEGFA": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        }
+      },
+      "results": [
+        {
+          "question": "Which approved therapies target ALK?",
+          "expected_target": "ALK",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "CERITINIB",
+            "CRIZOTINIB",
+            "LORLATINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ALK"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL4650298::PLB1003",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL4113131::ENSARTINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "LORLATINIB",
+            "PLB1003",
+            "CRIZOTINIB",
+            "ENSARTINIB",
+            "BRIGATINIB"
+          ],
+          "top_distances": [
+            0.8407217264175415,
+            0.8456727266311646,
+            0.8461694717407227,
+            0.8471777439117432,
+            0.8504112362861633
+          ]
+        },
+        {
+          "question": "What evidence supports ceritinib as an ALK therapy?",
+          "expected_target": "ALK",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "CERITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ALK"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL2403108::CERITINIB",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL3951811::CEP37440"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "CERITINIB",
+            "CRIZOTINIB",
+            "BRIGATINIB",
+            "LORLATINIB",
+            "CEP-37440"
+          ],
+          "top_distances": [
+            0.9059245586395264,
+            0.9285658597946167,
+            0.93438720703125,
+            0.9378681182861328,
+            0.9385551810264587
+          ]
+        },
+        {
+          "question": "Which ALK therapies have clinical trial evidence?",
+          "expected_target": "ALK",
+          "expected_source": "ClinicalTrials.gov",
+          "category": "Clinical Trials",
+          "expected_drugs": [
+            "ALECTINIB HYDROCHLORIDE",
+            "BRIGATINIB",
+            "CERITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ALK"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
+            "multi_target::ALK::CHEMBL4113131::ENSARTINIB",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL3707320::ALECTINIBHYDROCHLORIDE"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "LORLATINIB",
+            "BRIGATINIB",
+            "ENSARTINIB",
+            "CRIZOTINIB",
+            "ALECTINIB HYDROCHLORIDE"
+          ],
+          "top_distances": [
+            1.0016733407974243,
+            1.0038347244262695,
+            1.003993272781372,
+            1.0080665349960327,
+            1.010203242301941
+          ]
+        },
+        {
+          "question": "Which approved therapies target BRAF?",
+          "expected_target": "BRAF",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "target_filter": {
+            "target_symbol": "BRAF"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "ENCORAFENIB",
+            "REGORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE",
+            "DABRAFENIB MESYLATE"
+          ],
+          "top_distances": [
+            1.0097507238388062,
+            1.015334963798523,
+            1.0248076915740967,
+            1.0284030437469482,
+            1.0334804058074951
+          ]
+        },
+        {
+          "question": "What evidence supports encorafenib as a BRAF therapy?",
+          "expected_target": "BRAF",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "ENCORAFENIB"
+          ],
+          "target_filter": {
+            "target_symbol": "BRAF"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE",
+            "REGORAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "top_distances": [
+            0.949809193611145,
+            1.0844130516052246,
+            1.0934767723083496,
+            1.0957307815551758,
+            1.1275928020477295
+          ]
+        },
+        {
+          "question": "Which BRAF drugs have FDA label evidence?",
+          "expected_target": "BRAF",
+          "expected_source": "openFDA",
+          "category": "Drug Label Evidence",
+          "expected_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE"
+          ],
+          "target_filter": {
+            "target_symbol": "BRAF"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL4303729::PLIXORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "REGORAFENIB",
+            "VEMURAFENIB",
+            "ENCORAFENIB",
+            "PLIXORAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "top_distances": [
+            1.0691077709197998,
+            1.080054521560669,
+            1.0880460739135742,
+            1.1020565032958984,
+            1.1054863929748535
+          ]
+        },
+        {
+          "question": "Which approved therapies target EGFR?",
+          "expected_target": "EGFR",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "GEFITINIB",
+            "CETUXIMAB",
+            "AMIVANTAMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "EGFR"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "ERLOTINIB HYDROCHLORIDE",
+            "AFATINIB DIMALEATE"
+          ],
+          "top_distances": [
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349
+          ]
+        },
+        {
+          "question": "What evidence supports gefitinib as an EGFR therapy?",
+          "expected_target": "EGFR",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "GEFITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "EGFR"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "GEFITINIB",
+            "AMIVANTAMAB",
+            "BRIGATINIB",
+            "ERLOTINIB HYDROCHLORIDE",
+            "AFATINIB DIMALEATE"
+          ],
+          "top_distances": [
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197
+          ]
+        },
+        {
+          "question": "What diseases are associated with EGFR in Open Targets?",
+          "expected_target": "EGFR",
+          "expected_source": "Open Targets",
+          "category": "Target-Disease Context",
+          "expected_drugs": [
+            "GEFITINIB",
+            "CETUXIMAB",
+            "AMIVANTAMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "EGFR"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "ERLOTINIB HYDROCHLORIDE",
+            "AFATINIB DIMALEATE"
+          ],
+          "top_distances": [
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879
+          ]
+        },
+        {
+          "question": "Which HER2 or ERBB2 therapies are approved?",
+          "expected_target": "ERBB2",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "NERATINIB",
+            "MARGETUXIMAB",
+            "LAPATINIB DITOSYLATE"
+          ],
+          "target_filter": {
+            "target_symbol": "ERBB2"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL587723::AEE788",
+            "multi_target::ERBB2::CHEMBL2007641::PERTUZUMAB",
+            "multi_target::ERBB2::CHEMBL1645462::AC480",
+            "multi_target::ERBB2::CHEMBL2364649::MARGETUXIMAB"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "HEMAY-022",
+            "AEE-788",
+            "PERTUZUMAB",
+            "AC-480",
+            "MARGETUXIMAB"
+          ],
+          "top_distances": [
+            1.0643792152404785,
+            1.083207368850708,
+            1.0933725833892822,
+            1.0938825607299805,
+            1.0943524837493896
+          ]
+        },
+        {
+          "question": "What evidence supports neratinib as a HER2 ERBB2 therapy?",
+          "expected_target": "ERBB2",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "NERATINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ERBB2"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL180022::NERATINIB",
+            "multi_target::ERBB2::CHEMBL3989921::NERATINIBMALEATE",
+            "multi_target::ERBB2::CHEMBL3989868::TUCATINIB",
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL3545396::BMS690514"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "NERATINIB",
+            "NERATINIB MALEATE",
+            "TUCATINIB",
+            "HEMAY-022",
+            "BMS-690514"
+          ],
+          "top_distances": [
+            0.958694338798523,
+            0.9705737233161926,
+            0.9867212772369385,
+            0.9930525422096252,
+            1.0069386959075928
+          ]
+        },
+        {
+          "question": "Which ERBB2 therapies have PubMed literature evidence?",
+          "expected_target": "ERBB2",
+          "expected_source": "PubMed",
+          "category": "Literature Evidence",
+          "expected_drugs": [
+            "MARGETUXIMAB",
+            "NERATINIB",
+            "DACOMITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ERBB2"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL6067986::AV412",
+            "multi_target::ERBB2::CHEMBL587723::AEE788",
+            "multi_target::ERBB2::CHEMBL3989868::TUCATINIB",
+            "multi_target::ERBB2::CHEMBL1947204::ALLITINIB"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "HEMAY-022",
+            "AV-412",
+            "AEE-788",
+            "TUCATINIB",
+            "ALLITINIB"
+          ],
+          "top_distances": [
+            1.1463704109191895,
+            1.152794599533081,
+            1.1571130752563477,
+            1.1593244075775146,
+            1.1641921997070312
+          ]
+        },
+        {
+          "question": "Which approved therapies target KRAS?",
+          "expected_target": "KRAS",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "target_filter": {
+            "target_symbol": "KRAS"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4594350::ADAGRASIB",
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB"
+          ],
+          "top_targets": [
+            "KRAS",
+            "KRAS"
+          ],
+          "top_drugs": [
+            "ADAGRASIB",
+            "SOTORASIB"
+          ],
+          "top_distances": [
+            1.2859859466552734,
+            1.292781114578247
+          ]
+        },
+        {
+          "question": "What evidence supports sotorasib as a KRAS therapy?",
+          "expected_target": "KRAS",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "SOTORASIB"
+          ],
+          "target_filter": {
+            "target_symbol": "KRAS"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB",
+            "multi_target::KRAS::CHEMBL4594350::ADAGRASIB"
+          ],
+          "top_targets": [
+            "KRAS",
+            "KRAS"
+          ],
+          "top_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "top_distances": [
+            1.4672555923461914,
+            1.5240670442581177
+          ]
+        },
+        {
+          "question": "Which KRAS drugs have clinical trial evidence?",
+          "expected_target": "KRAS",
+          "expected_source": "ClinicalTrials.gov",
+          "category": "Clinical Trials",
+          "expected_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "target_filter": {
+            "target_symbol": "KRAS"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4594350::ADAGRASIB",
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB"
+          ],
+          "top_targets": [
+            "KRAS",
+            "KRAS"
+          ],
+          "top_drugs": [
+            "ADAGRASIB",
+            "SOTORASIB"
+          ],
+          "top_distances": [
+            1.4814419746398926,
+            1.4887440204620361
+          ]
+        },
+        {
+          "question": "Which approved therapies target MET?",
+          "expected_target": "MET",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "CAPMATINIB",
+            "TEPOTINIB",
+            "CRIZOTINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "MET"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL4594292::TEPOTINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::MET::CHEMBL3545299::BMS698769",
+            "multi_target::MET::CHEMBL3301578::EMIBETUZUMAB"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB HYDROCHLORIDE",
+            "TEPOTINIB HYDROCHLORIDE",
+            "AMIVANTAMAB",
+            "BMS-698769",
+            "EMIBETUZUMAB"
+          ],
+          "top_distances": [
+            1.3946681022644043,
+            1.4154127836227417,
+            1.4190428256988525,
+            1.4213533401489258,
+            1.4225953817367554
+          ]
+        },
+        {
+          "question": "What evidence supports capmatinib as a MET therapy?",
+          "expected_target": "MET",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "CAPMATINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "MET"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3188267::CAPMATINIB",
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL2103868::CABOZANTINIBSMALATE",
+            "multi_target::MET::CHEMBL4461070::SAR125844",
+            "multi_target::MET::CHEMBL3990032::TELISOTUZUMABVEDOTIN"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB",
+            "CAPMATINIB HYDROCHLORIDE",
+            "CABOZANTINIB S-MALATE",
+            "SAR-125844",
+            "TELISOTUZUMAB VEDOTIN"
+          ],
+          "top_distances": [
+            1.293649435043335,
+            1.2504816055297852,
+            1.382085919380188,
+            1.3872979879379272,
+            1.3880112171173096
+          ]
+        },
+        {
+          "question": "Which MET therapies have DrugCentral indication evidence?",
+          "expected_target": "MET",
+          "expected_source": "DrugCentral",
+          "category": "Indication Evidence",
+          "expected_drugs": [
+            "CAPMATINIB",
+            "TEPOTINIB",
+            "CRIZOTINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "MET"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL2103868::CABOZANTINIBSMALATE",
+            "multi_target::MET::CHEMBL4594292::TEPOTINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL4594472::BAFISONTAMAB",
+            "multi_target::MET::CHEMBL4650326::TEREVALEFIM"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB HYDROCHLORIDE",
+            "CABOZANTINIB S-MALATE",
+            "TEPOTINIB HYDROCHLORIDE",
+            "BAFISONTAMAB",
+            "TEREVALEFIM"
+          ],
+          "top_distances": [
+            1.4293224811553955,
+            1.4428136348724365,
+            1.4485963582992554,
+            1.4544589519500732,
+            1.4563944339752197
+          ]
+        },
+        {
+          "question": "Which approved therapies target PIK3CA?",
+          "expected_target": "PIK3CA",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "INAVOLISIB"
+          ],
+          "target_filter": {
+            "target_symbol": "PIK3CA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB"
+          ],
+          "top_distances": [
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756
+          ]
+        },
+        {
+          "question": "What evidence supports alpelisib as a PIK3CA therapy?",
+          "expected_target": "PIK3CA",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "ALPELISIB"
+          ],
+          "target_filter": {
+            "target_symbol": "PIK3CA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB"
+          ],
+          "top_distances": [
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458
+          ]
+        },
+        {
+          "question": "Which PIK3CA therapies have FDA label evidence?",
+          "expected_target": "PIK3CA",
+          "expected_source": "openFDA",
+          "category": "Drug Label Evidence",
+          "expected_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "INAVOLISIB"
+          ],
+          "target_filter": {
+            "target_symbol": "PIK3CA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB"
+          ],
+          "top_distances": [
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065
+          ]
+        },
+        {
+          "question": "Which approved therapies target VEGFA?",
+          "expected_target": "VEGFA",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "AFLIBERCEPT",
+            "BEVACIZUMAB",
+            "RANIBIZUMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "VEGFA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL2108752::PEGAPTANIBOCTASODIUM",
+            "multi_target::VEGFA::CHEMBL4297163::MUPARFOSTAT",
+            "multi_target::VEGFA::CHEMBL4297684::ABICIPARPEGOL",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL5314727::BEVACIZUMABGAMMA"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "PEGAPTANIB OCTASODIUM",
+            "MUPARFOSTAT",
+            "ABICIPAR PEGOL",
+            "VANUCIZUMAB",
+            "BEVACIZUMAB GAMMA"
+          ],
+          "top_distances": [
+            0.9989075660705566,
+            1.0020265579223633,
+            1.0074398517608643,
+            1.0079307556152344,
+            1.0128509998321533
+          ]
+        },
+        {
+          "question": "What evidence supports bevacizumab as a VEGFA therapy?",
+          "expected_target": "VEGFA",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "BEVACIZUMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "VEGFA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL1201583::BEVACIZUMAB",
+            "multi_target::VEGFA::CHEMBL5314727::BEVACIZUMABGAMMA",
+            "multi_target::VEGFA::CHEMBL3707253::BEVACIZUMAB111IN",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL4297750::FARICIMAB"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "BEVACIZUMAB",
+            "BEVACIZUMAB GAMMA",
+            "BEVACIZUMAB 111IN",
+            "VANUCIZUMAB",
+            "FARICIMAB"
+          ],
+          "top_distances": [
+            0.982512891292572,
+            0.9841148853302002,
+            0.9984773993492126,
+            1.0220930576324463,
+            1.0494184494018555
+          ]
+        },
+        {
+          "question": "Which VEGFA therapies have DrugCentral indication evidence?",
+          "expected_target": "VEGFA",
+          "expected_source": "DrugCentral",
+          "category": "Indication Evidence",
+          "expected_drugs": [
+            "AFLIBERCEPT",
+            "BEVACIZUMAB",
+            "RANIBIZUMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "VEGFA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL1201421::PEGAPTANIBSODIUM",
+            "multi_target::VEGFA::CHEMBL2108752::PEGAPTANIBOCTASODIUM",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL4297684::ABICIPARPEGOL",
+            "multi_target::VEGFA::CHEMBL4297163::MUPARFOSTAT"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "PEGAPTANIB SODIUM",
+            "PEGAPTANIB OCTASODIUM",
+            "VANUCIZUMAB",
+            "ABICIPAR PEGOL",
+            "MUPARFOSTAT"
+          ],
+          "top_distances": [
+            0.9914204478263855,
+            0.9943888187408447,
+            1.0037171840667725,
+            1.004213809967041,
+            1.0052061080932617
+          ]
+        }
+      ]
+    },
+    {
+      "approach_name": "chroma_target_filter_rerank_top10",
+      "chunks_file": "data/processed/multi_target_therapy_knowledge_base_chunks.jsonl",
+      "collection_name": "multi_target_therapeutic_strategy",
+      "top_k": 10,
+      "use_target_filter": true,
+      "rerank_named_drugs": true,
+      "indexed_chunk_count": 207,
+      "indexed_targets": [
+        "ALK",
+        "BRAF",
+        "EGFR",
+        "ERBB2",
+        "KRAS",
+        "MET",
+        "PIK3CA",
+        "VEGFA"
+      ],
+      "question_count": 24,
+      "hit_count": 24,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "hits_by_target": {
+        "ALK": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "BRAF": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "EGFR": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "ERBB2": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "KRAS": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "MET": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "PIK3CA": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        },
+        "VEGFA": {
+          "question_count": 3,
+          "hit_count": 3,
+          "hit_rate": 1.0
+        }
+      },
+      "results": [
+        {
+          "question": "Which approved therapies target ALK?",
+          "expected_target": "ALK",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "CERITINIB",
+            "CRIZOTINIB",
+            "LORLATINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ALK"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL4650298::PLB1003",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL4113131::ENSARTINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
+            "multi_target::ALK::CHEMBL3707320::ALECTINIBHYDROCHLORIDE",
+            "multi_target::ALK::CHEMBL3951811::CEP37440",
+            "multi_target::ALK::CHEMBL3545360::ASP3026",
+            "multi_target::ALK::CHEMBL2403108::CERITINIB",
+            "multi_target::ALK::CHEMBL1983268::ENTRECTINIB"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "LORLATINIB",
+            "PLB1003",
+            "CRIZOTINIB",
+            "ENSARTINIB",
+            "BRIGATINIB",
+            "ALECTINIB HYDROCHLORIDE",
+            "CEP-37440",
+            "ASP-3026",
+            "CERITINIB",
+            "ENTRECTINIB"
+          ],
+          "top_distances": [
+            0.8407217264175415,
+            0.8456727266311646,
+            0.8461694717407227,
+            0.8471777439117432,
+            0.8504112362861633,
+            0.8539464473724365,
+            0.8567845821380615,
+            0.8584327697753906,
+            0.8591724634170532,
+            0.8616443872451782
+          ]
+        },
+        {
+          "question": "What evidence supports ceritinib as an ALK therapy?",
+          "expected_target": "ALK",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "CERITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ALK"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL2403108::CERITINIB",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL3951811::CEP37440",
+            "multi_target::ALK::CHEMBL4113131::ENSARTINIB",
+            "multi_target::ALK::CHEMBL3899477::CONTELTINIB",
+            "multi_target::ALK::CHEMBL4650298::PLB1003",
+            "multi_target::ALK::CHEMBL1983268::ENTRECTINIB",
+            "multi_target::ALK::CHEMBL3545360::ASP3026"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "CERITINIB",
+            "CRIZOTINIB",
+            "BRIGATINIB",
+            "LORLATINIB",
+            "CEP-37440",
+            "ENSARTINIB",
+            "CONTELTINIB",
+            "PLB1003",
+            "ENTRECTINIB",
+            "ASP-3026"
+          ],
+          "top_distances": [
+            0.9059245586395264,
+            0.9285658597946167,
+            0.93438720703125,
+            0.9378681182861328,
+            0.9385551810264587,
+            0.9423129558563232,
+            0.9425255060195923,
+            0.9477767944335938,
+            0.951951265335083,
+            0.9537179470062256
+          ]
+        },
+        {
+          "question": "Which ALK therapies have clinical trial evidence?",
+          "expected_target": "ALK",
+          "expected_source": "ClinicalTrials.gov",
+          "category": "Clinical Trials",
+          "expected_drugs": [
+            "ALECTINIB HYDROCHLORIDE",
+            "BRIGATINIB",
+            "CERITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ALK"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ALK::CHEMBL3286830::LORLATINIB",
+            "multi_target::ALK::CHEMBL3545311::BRIGATINIB",
+            "multi_target::ALK::CHEMBL4113131::ENSARTINIB",
+            "multi_target::ALK::CHEMBL601719::CRIZOTINIB",
+            "multi_target::ALK::CHEMBL3707320::ALECTINIBHYDROCHLORIDE",
+            "multi_target::ALK::CHEMBL4650298::PLB1003",
+            "multi_target::ALK::CHEMBL2403108::CERITINIB",
+            "multi_target::ALK::CHEMBL3951811::CEP37440",
+            "multi_target::ALK::CHEMBL3545360::ASP3026",
+            "multi_target::ALK::CHEMBL1983268::ENTRECTINIB"
+          ],
+          "top_targets": [
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK",
+            "ALK"
+          ],
+          "top_drugs": [
+            "LORLATINIB",
+            "BRIGATINIB",
+            "ENSARTINIB",
+            "CRIZOTINIB",
+            "ALECTINIB HYDROCHLORIDE",
+            "PLB1003",
+            "CERITINIB",
+            "CEP-37440",
+            "ASP-3026",
+            "ENTRECTINIB"
+          ],
+          "top_distances": [
+            1.0016733407974243,
+            1.0038347244262695,
+            1.003993272781372,
+            1.0080665349960327,
+            1.010203242301941,
+            1.011225700378418,
+            1.0192210674285889,
+            1.019782304763794,
+            1.023411750793457,
+            1.0237488746643066
+          ]
+        },
+        {
+          "question": "Which approved therapies target BRAF?",
+          "expected_target": "BRAF",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "DABRAFENIB MESYLATE"
+          ],
+          "target_filter": {
+            "target_symbol": "BRAF"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE",
+            "multi_target::BRAF::CHEMBL3577124::LY3009120",
+            "multi_target::BRAF::CHEMBL3545263::LGX806",
+            "multi_target::BRAF::CHEMBL4303729::PLIXORAFENIB",
+            "multi_target::BRAF::CHEMBL4209157::LIFIRAFENIB",
+            "multi_target::BRAF::CHEMBL2029988::CEP32496"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "ENCORAFENIB",
+            "REGORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE",
+            "DABRAFENIB MESYLATE",
+            "LY-3009120",
+            "LGX-806",
+            "PLIXORAFENIB",
+            "LIFIRAFENIB",
+            "CEP-32496"
+          ],
+          "top_distances": [
+            1.0097507238388062,
+            1.015334963798523,
+            1.0248076915740967,
+            1.0284030437469482,
+            1.0334804058074951,
+            1.0427861213684082,
+            1.0464985370635986,
+            1.0465130805969238,
+            1.0504999160766602,
+            1.051802635192871
+          ]
+        },
+        {
+          "question": "What evidence supports encorafenib as a BRAF therapy?",
+          "expected_target": "BRAF",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "ENCORAFENIB"
+          ],
+          "target_filter": {
+            "target_symbol": "BRAF"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE",
+            "multi_target::BRAF::CHEMBL4209157::LIFIRAFENIB",
+            "multi_target::BRAF::CHEMBL2029988::CEP32496",
+            "multi_target::BRAF::CHEMBL4303729::PLIXORAFENIB",
+            "multi_target::BRAF::CHEMBL3577124::LY3009120",
+            "multi_target::BRAF::CHEMBL3545027::XL281"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE",
+            "REGORAFENIB",
+            "DABRAFENIB MESYLATE",
+            "LIFIRAFENIB",
+            "CEP-32496",
+            "PLIXORAFENIB",
+            "LY-3009120",
+            "XL-281"
+          ],
+          "top_distances": [
+            0.949809193611145,
+            1.0844130516052246,
+            1.0934767723083496,
+            1.0957307815551758,
+            1.1275928020477295,
+            1.1324520111083984,
+            1.1333141326904297,
+            1.1355013847351074,
+            1.1392812728881836,
+            1.144986629486084
+          ]
+        },
+        {
+          "question": "Which BRAF drugs have FDA label evidence?",
+          "expected_target": "BRAF",
+          "expected_source": "openFDA",
+          "category": "Drug Label Evidence",
+          "expected_drugs": [
+            "ENCORAFENIB",
+            "VEMURAFENIB",
+            "SORAFENIB TOSYLATE"
+          ],
+          "target_filter": {
+            "target_symbol": "BRAF"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::BRAF::CHEMBL1946170::REGORAFENIB",
+            "multi_target::BRAF::CHEMBL1229517::VEMURAFENIB",
+            "multi_target::BRAF::CHEMBL3301612::ENCORAFENIB",
+            "multi_target::BRAF::CHEMBL4303729::PLIXORAFENIB",
+            "multi_target::BRAF::CHEMBL2105729::DABRAFENIBMESYLATE",
+            "multi_target::BRAF::CHEMBL1200485::SORAFENIBTOSYLATE",
+            "multi_target::BRAF::CHEMBL3545263::LGX806",
+            "multi_target::BRAF::CHEMBL3577124::LY3009120",
+            "multi_target::BRAF::CHEMBL4209157::LIFIRAFENIB",
+            "multi_target::BRAF::CHEMBL2029988::CEP32496"
+          ],
+          "top_targets": [
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF",
+            "BRAF"
+          ],
+          "top_drugs": [
+            "REGORAFENIB",
+            "VEMURAFENIB",
+            "ENCORAFENIB",
+            "PLIXORAFENIB",
+            "DABRAFENIB MESYLATE",
+            "SORAFENIB TOSYLATE",
+            "LGX-806",
+            "LY-3009120",
+            "LIFIRAFENIB",
+            "CEP-32496"
+          ],
+          "top_distances": [
+            1.0691077709197998,
+            1.080054521560669,
+            1.0880460739135742,
+            1.1020565032958984,
+            1.1054863929748535,
+            1.1279573440551758,
+            1.1320018768310547,
+            1.1418828964233398,
+            1.1447343826293945,
+            1.1511867046356201
+          ]
+        },
+        {
+          "question": "Which approved therapies target EGFR?",
+          "expected_target": "EGFR",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "GEFITINIB",
+            "CETUXIMAB",
+            "AMIVANTAMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "EGFR"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE",
+            "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS",
+            "multi_target::EGFR::CHEMBL4650319::MOBOCERTINIB",
+            "multi_target::EGFR::CHEMBL180022::NERATINIB",
+            "multi_target::EGFR::CHEMBL3786343::OLMUTINIB",
+            "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "ERLOTINIB HYDROCHLORIDE",
+            "AFATINIB DIMALEATE",
+            "DACOMITINIB ANHYDROUS",
+            "MOBOCERTINIB",
+            "NERATINIB",
+            "OLMUTINIB",
+            "OSIMERTINIB"
+          ],
+          "top_distances": [
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349,
+            0.8557912111282349
+          ]
+        },
+        {
+          "question": "What evidence supports gefitinib as an EGFR therapy?",
+          "expected_target": "EGFR",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "GEFITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "EGFR"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE",
+            "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS",
+            "multi_target::EGFR::CHEMBL4650319::MOBOCERTINIB",
+            "multi_target::EGFR::CHEMBL180022::NERATINIB",
+            "multi_target::EGFR::CHEMBL3786343::OLMUTINIB",
+            "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "GEFITINIB",
+            "AMIVANTAMAB",
+            "BRIGATINIB",
+            "ERLOTINIB HYDROCHLORIDE",
+            "AFATINIB DIMALEATE",
+            "DACOMITINIB ANHYDROUS",
+            "MOBOCERTINIB",
+            "NERATINIB",
+            "OLMUTINIB",
+            "OSIMERTINIB"
+          ],
+          "top_distances": [
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197,
+            0.9421122074127197
+          ]
+        },
+        {
+          "question": "What diseases are associated with EGFR in Open Targets?",
+          "expected_target": "EGFR",
+          "expected_source": "Open Targets",
+          "category": "Target-Disease Context",
+          "expected_drugs": [
+            "GEFITINIB",
+            "CETUXIMAB",
+            "AMIVANTAMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "EGFR"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL939::GEFITINIB",
+            "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE",
+            "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS",
+            "multi_target::EGFR::CHEMBL4650319::MOBOCERTINIB",
+            "multi_target::EGFR::CHEMBL180022::NERATINIB",
+            "multi_target::EGFR::CHEMBL3786343::OLMUTINIB",
+            "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB"
+          ],
+          "top_targets": [
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR",
+            "EGFR"
+          ],
+          "top_drugs": [
+            "AMIVANTAMAB",
+            "GEFITINIB",
+            "BRIGATINIB",
+            "ERLOTINIB HYDROCHLORIDE",
+            "AFATINIB DIMALEATE",
+            "DACOMITINIB ANHYDROUS",
+            "MOBOCERTINIB",
+            "NERATINIB",
+            "OLMUTINIB",
+            "OSIMERTINIB"
+          ],
+          "top_distances": [
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879,
+            0.7336524128913879
+          ]
+        },
+        {
+          "question": "Which HER2 or ERBB2 therapies are approved?",
+          "expected_target": "ERBB2",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "NERATINIB",
+            "MARGETUXIMAB",
+            "LAPATINIB DITOSYLATE"
+          ],
+          "target_filter": {
+            "target_symbol": "ERBB2"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL587723::AEE788",
+            "multi_target::ERBB2::CHEMBL2007641::PERTUZUMAB",
+            "multi_target::ERBB2::CHEMBL1645462::AC480",
+            "multi_target::ERBB2::CHEMBL2364649::MARGETUXIMAB",
+            "multi_target::ERBB2::CHEMBL3989868::TUCATINIB",
+            "multi_target::ERBB2::CHEMBL3545200::S222611",
+            "multi_target::ERBB2::CHEMBL1614725::TAK285",
+            "multi_target::ERBB2::CHEMBL6067986::AV412",
+            "multi_target::ERBB2::CHEMBL180022::NERATINIB"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "HEMAY-022",
+            "AEE-788",
+            "PERTUZUMAB",
+            "AC-480",
+            "MARGETUXIMAB",
+            "TUCATINIB",
+            "S-222611",
+            "TAK-285",
+            "AV-412",
+            "NERATINIB"
+          ],
+          "top_distances": [
+            1.0643792152404785,
+            1.083207368850708,
+            1.0933725833892822,
+            1.0938825607299805,
+            1.0943524837493896,
+            1.0960975885391235,
+            1.0992121696472168,
+            1.0992136001586914,
+            1.0999987125396729,
+            1.100203514099121
+          ]
+        },
+        {
+          "question": "What evidence supports neratinib as a HER2 ERBB2 therapy?",
+          "expected_target": "ERBB2",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "NERATINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ERBB2"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL180022::NERATINIB",
+            "multi_target::ERBB2::CHEMBL3989921::NERATINIBMALEATE",
+            "multi_target::ERBB2::CHEMBL3989868::TUCATINIB",
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL3545396::BMS690514",
+            "multi_target::ERBB2::CHEMBL2007641::PERTUZUMAB",
+            "multi_target::ERBB2::CHEMBL1614725::TAK285",
+            "multi_target::ERBB2::CHEMBL587723::AEE788",
+            "multi_target::ERBB2::CHEMBL2364649::MARGETUXIMAB",
+            "multi_target::ERBB2::CHEMBL6067986::AV412"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "NERATINIB",
+            "NERATINIB MALEATE",
+            "TUCATINIB",
+            "HEMAY-022",
+            "BMS-690514",
+            "PERTUZUMAB",
+            "TAK-285",
+            "AEE-788",
+            "MARGETUXIMAB",
+            "AV-412"
+          ],
+          "top_distances": [
+            0.958694338798523,
+            0.9705737233161926,
+            0.9867212772369385,
+            0.9930525422096252,
+            1.0069386959075928,
+            1.0071125030517578,
+            1.009268879890442,
+            1.010729432106018,
+            1.0131652355194092,
+            1.0134339332580566
+          ]
+        },
+        {
+          "question": "Which ERBB2 therapies have PubMed literature evidence?",
+          "expected_target": "ERBB2",
+          "expected_source": "PubMed",
+          "category": "Literature Evidence",
+          "expected_drugs": [
+            "MARGETUXIMAB",
+            "NERATINIB",
+            "DACOMITINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "ERBB2"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::ERBB2::CHEMBL3545111::HEMAY022",
+            "multi_target::ERBB2::CHEMBL6067986::AV412",
+            "multi_target::ERBB2::CHEMBL587723::AEE788",
+            "multi_target::ERBB2::CHEMBL3989868::TUCATINIB",
+            "multi_target::ERBB2::CHEMBL1947204::ALLITINIB",
+            "multi_target::ERBB2::CHEMBL1645462::AC480",
+            "multi_target::ERBB2::CHEMBL3545200::S222611",
+            "multi_target::ERBB2::CHEMBL2103842::VARLITINIB",
+            "multi_target::ERBB2::CHEMBL4650256::ZANIDATAMAB",
+            "multi_target::ERBB2::CHEMBL2364649::MARGETUXIMAB"
+          ],
+          "top_targets": [
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2",
+            "ERBB2"
+          ],
+          "top_drugs": [
+            "HEMAY-022",
+            "AV-412",
+            "AEE-788",
+            "TUCATINIB",
+            "ALLITINIB",
+            "AC-480",
+            "S-222611",
+            "VARLITINIB",
+            "ZANIDATAMAB",
+            "MARGETUXIMAB"
+          ],
+          "top_distances": [
+            1.1463704109191895,
+            1.152794599533081,
+            1.1571130752563477,
+            1.1593244075775146,
+            1.1641921997070312,
+            1.1650645732879639,
+            1.1652984619140625,
+            1.166421890258789,
+            1.1665794849395752,
+            1.167006254196167
+          ]
+        },
+        {
+          "question": "Which approved therapies target KRAS?",
+          "expected_target": "KRAS",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "target_filter": {
+            "target_symbol": "KRAS"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4594350::ADAGRASIB",
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB"
+          ],
+          "top_targets": [
+            "KRAS",
+            "KRAS"
+          ],
+          "top_drugs": [
+            "ADAGRASIB",
+            "SOTORASIB"
+          ],
+          "top_distances": [
+            1.2859859466552734,
+            1.292781114578247
+          ]
+        },
+        {
+          "question": "What evidence supports sotorasib as a KRAS therapy?",
+          "expected_target": "KRAS",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "SOTORASIB"
+          ],
+          "target_filter": {
+            "target_symbol": "KRAS"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB",
+            "multi_target::KRAS::CHEMBL4594350::ADAGRASIB"
+          ],
+          "top_targets": [
+            "KRAS",
+            "KRAS"
+          ],
+          "top_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "top_distances": [
+            1.4672555923461914,
+            1.5240670442581177
+          ]
+        },
+        {
+          "question": "Which KRAS drugs have clinical trial evidence?",
+          "expected_target": "KRAS",
+          "expected_source": "ClinicalTrials.gov",
+          "category": "Clinical Trials",
+          "expected_drugs": [
+            "SOTORASIB",
+            "ADAGRASIB"
+          ],
+          "target_filter": {
+            "target_symbol": "KRAS"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::KRAS::CHEMBL4594350::ADAGRASIB",
+            "multi_target::KRAS::CHEMBL4535757::SOTORASIB"
+          ],
+          "top_targets": [
+            "KRAS",
+            "KRAS"
+          ],
+          "top_drugs": [
+            "ADAGRASIB",
+            "SOTORASIB"
+          ],
+          "top_distances": [
+            1.4814419746398926,
+            1.4887440204620361
+          ]
+        },
+        {
+          "question": "Which approved therapies target MET?",
+          "expected_target": "MET",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "CAPMATINIB",
+            "TEPOTINIB",
+            "CRIZOTINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "MET"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL4594292::TEPOTINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::MET::CHEMBL3545299::BMS698769",
+            "multi_target::MET::CHEMBL3301578::EMIBETUZUMAB",
+            "multi_target::MET::CHEMBL4650326::TEREVALEFIM",
+            "multi_target::MET::CHEMBL3990032::TELISOTUZUMABVEDOTIN",
+            "multi_target::MET::CHEMBL3188267::CAPMATINIB",
+            "multi_target::MET::CHEMBL3545050::BMS817378",
+            "multi_target::MET::CHEMBL460702::BMS777607"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB HYDROCHLORIDE",
+            "TEPOTINIB HYDROCHLORIDE",
+            "AMIVANTAMAB",
+            "BMS-698769",
+            "EMIBETUZUMAB",
+            "TEREVALEFIM",
+            "TELISOTUZUMAB VEDOTIN",
+            "CAPMATINIB",
+            "BMS-817378",
+            "BMS-777607"
+          ],
+          "top_distances": [
+            1.3946681022644043,
+            1.4154127836227417,
+            1.4190428256988525,
+            1.4213533401489258,
+            1.4225953817367554,
+            1.4250696897506714,
+            1.4261404275894165,
+            1.4268009662628174,
+            1.4272551536560059,
+            1.4282797574996948
+          ]
+        },
+        {
+          "question": "What evidence supports capmatinib as a MET therapy?",
+          "expected_target": "MET",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "CAPMATINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "MET"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3188267::CAPMATINIB",
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL2103868::CABOZANTINIBSMALATE",
+            "multi_target::MET::CHEMBL4461070::SAR125844",
+            "multi_target::MET::CHEMBL3990032::TELISOTUZUMABVEDOTIN",
+            "multi_target::MET::CHEMBL3545299::BMS698769",
+            "multi_target::MET::CHEMBL3545419::TELISOTUZUMAB",
+            "multi_target::MET::CHEMBL4594292::TEPOTINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL1236107::SGX523",
+            "multi_target::MET::CHEMBL2103851::AMUVATINIB"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB",
+            "CAPMATINIB HYDROCHLORIDE",
+            "CABOZANTINIB S-MALATE",
+            "SAR-125844",
+            "TELISOTUZUMAB VEDOTIN",
+            "BMS-698769",
+            "TELISOTUZUMAB",
+            "TEPOTINIB HYDROCHLORIDE",
+            "SGX-523",
+            "AMUVATINIB"
+          ],
+          "top_distances": [
+            1.293649435043335,
+            1.2504816055297852,
+            1.382085919380188,
+            1.3872979879379272,
+            1.3880112171173096,
+            1.3889920711517334,
+            1.389248013496399,
+            1.3923678398132324,
+            1.394245982170105,
+            1.3949060440063477
+          ]
+        },
+        {
+          "question": "Which MET therapies have DrugCentral indication evidence?",
+          "expected_target": "MET",
+          "expected_source": "DrugCentral",
+          "category": "Indication Evidence",
+          "expected_drugs": [
+            "CAPMATINIB",
+            "TEPOTINIB",
+            "CRIZOTINIB"
+          ],
+          "target_filter": {
+            "target_symbol": "MET"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::MET::CHEMBL3989937::CAPMATINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL2103868::CABOZANTINIBSMALATE",
+            "multi_target::MET::CHEMBL4594292::TEPOTINIBHYDROCHLORIDE",
+            "multi_target::MET::CHEMBL4594472::BAFISONTAMAB",
+            "multi_target::MET::CHEMBL4650326::TEREVALEFIM",
+            "multi_target::MET::CHEMBL3545365::ALTIRATINIB",
+            "multi_target::MET::CHEMBL2103851::AMUVATINIB",
+            "multi_target::MET::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::MET::CHEMBL3545299::BMS698769",
+            "multi_target::MET::CHEMBL601719::CRIZOTINIB"
+          ],
+          "top_targets": [
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET",
+            "MET"
+          ],
+          "top_drugs": [
+            "CAPMATINIB HYDROCHLORIDE",
+            "CABOZANTINIB S-MALATE",
+            "TEPOTINIB HYDROCHLORIDE",
+            "BAFISONTAMAB",
+            "TEREVALEFIM",
+            "ALTIRATINIB",
+            "AMUVATINIB",
+            "AMIVANTAMAB",
+            "BMS-698769",
+            "CRIZOTINIB"
+          ],
+          "top_distances": [
+            1.4293224811553955,
+            1.4428136348724365,
+            1.4485963582992554,
+            1.4544589519500732,
+            1.4563944339752197,
+            1.457204818725586,
+            1.4578924179077148,
+            1.4619030952453613,
+            1.462770700454712,
+            1.4663159847259521
+          ]
+        },
+        {
+          "question": "Which approved therapies target PIK3CA?",
+          "expected_target": "PIK3CA",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "INAVOLISIB"
+          ],
+          "target_filter": {
+            "target_symbol": "PIK3CA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB",
+            "multi_target::PIK3CA::CHEMBL3644672::BAY1082439",
+            "multi_target::PIK3CA::CHEMBL3622533::FIMEPINOSTAT",
+            "multi_target::PIK3CA::CHEMBL1258517::PKI179",
+            "multi_target::PIK3CA::CHEMBL3545323::PWT33579"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB",
+            "BAY-1082439",
+            "FIMEPINOSTAT",
+            "PKI-179",
+            "PWT-33579"
+          ],
+          "top_distances": [
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756,
+            1.0870797634124756
+          ]
+        },
+        {
+          "question": "What evidence supports alpelisib as a PIK3CA therapy?",
+          "expected_target": "PIK3CA",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "ALPELISIB"
+          ],
+          "target_filter": {
+            "target_symbol": "PIK3CA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB",
+            "multi_target::PIK3CA::CHEMBL3644672::BAY1082439",
+            "multi_target::PIK3CA::CHEMBL3622533::FIMEPINOSTAT",
+            "multi_target::PIK3CA::CHEMBL1258517::PKI179",
+            "multi_target::PIK3CA::CHEMBL3545323::PWT33579"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB",
+            "BAY-1082439",
+            "FIMEPINOSTAT",
+            "PKI-179",
+            "PWT-33579"
+          ],
+          "top_distances": [
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458,
+            1.23868989944458
+          ]
+        },
+        {
+          "question": "Which PIK3CA therapies have FDA label evidence?",
+          "expected_target": "PIK3CA",
+          "expected_source": "openFDA",
+          "category": "Drug Label Evidence",
+          "expected_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "INAVOLISIB"
+          ],
+          "target_filter": {
+            "target_symbol": "PIK3CA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::PIK3CA::CHEMBL2396661::ALPELISIB",
+            "multi_target::PIK3CA::CHEMBL3218576::COPANLISIB",
+            "multi_target::PIK3CA::CHEMBL3545068::COPANLISIBHYDROCHLORIDE",
+            "multi_target::PIK3CA::CHEMBL4650215::INAVOLISIB",
+            "multi_target::PIK3CA::CHEMBL3935857::SERABELISIB",
+            "multi_target::PIK3CA::CHEMBL3644672::BAY1082439",
+            "multi_target::PIK3CA::CHEMBL3622533::FIMEPINOSTAT",
+            "multi_target::PIK3CA::CHEMBL1258517::PKI179",
+            "multi_target::PIK3CA::CHEMBL3545323::PWT33579"
+          ],
+          "top_targets": [
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA",
+            "PIK3CA"
+          ],
+          "top_drugs": [
+            "ALPELISIB",
+            "COPANLISIB",
+            "COPANLISIB HYDROCHLORIDE",
+            "INAVOLISIB",
+            "SERABELISIB",
+            "BAY-1082439",
+            "FIMEPINOSTAT",
+            "PKI-179",
+            "PWT-33579"
+          ],
+          "top_distances": [
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065,
+            1.175596833229065
+          ]
+        },
+        {
+          "question": "Which approved therapies target VEGFA?",
+          "expected_target": "VEGFA",
+          "expected_source": "ChEMBL | openFDA",
+          "category": "Approval Status",
+          "expected_drugs": [
+            "AFLIBERCEPT",
+            "BEVACIZUMAB",
+            "RANIBIZUMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "VEGFA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL2108752::PEGAPTANIBOCTASODIUM",
+            "multi_target::VEGFA::CHEMBL4297163::MUPARFOSTAT",
+            "multi_target::VEGFA::CHEMBL4297684::ABICIPARPEGOL",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL5314727::BEVACIZUMABGAMMA",
+            "multi_target::VEGFA::CHEMBL3707253::BEVACIZUMAB111IN",
+            "multi_target::VEGFA::CHEMBL1201421::PEGAPTANIBSODIUM",
+            "multi_target::VEGFA::CHEMBL1201583::BEVACIZUMAB",
+            "multi_target::VEGFA::CHEMBL4297750::FARICIMAB",
+            "multi_target::VEGFA::CHEMBL3707357::BROLUCIZUMAB"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "PEGAPTANIB OCTASODIUM",
+            "MUPARFOSTAT",
+            "ABICIPAR PEGOL",
+            "VANUCIZUMAB",
+            "BEVACIZUMAB GAMMA",
+            "BEVACIZUMAB 111IN",
+            "PEGAPTANIB SODIUM",
+            "BEVACIZUMAB",
+            "FARICIMAB",
+            "BROLUCIZUMAB"
+          ],
+          "top_distances": [
+            0.9989075660705566,
+            1.0020265579223633,
+            1.0074398517608643,
+            1.0079307556152344,
+            1.0128509998321533,
+            1.0128917694091797,
+            1.013695240020752,
+            1.0146865844726562,
+            1.0230001211166382,
+            1.0262881517410278
+          ]
+        },
+        {
+          "question": "What evidence supports bevacizumab as a VEGFA therapy?",
+          "expected_target": "VEGFA",
+          "expected_source": "ChEMBL | PubMed | ClinicalTrials.gov | openFDA | DrugCentral",
+          "category": "Evidence Summary",
+          "expected_drugs": [
+            "BEVACIZUMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "VEGFA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL1201583::BEVACIZUMAB",
+            "multi_target::VEGFA::CHEMBL5314727::BEVACIZUMABGAMMA",
+            "multi_target::VEGFA::CHEMBL3707253::BEVACIZUMAB111IN",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL4297750::FARICIMAB",
+            "multi_target::VEGFA::CHEMBL4297684::ABICIPARPEGOL",
+            "multi_target::VEGFA::CHEMBL1742982::AFLIBERCEPT",
+            "multi_target::VEGFA::CHEMBL3707357::BROLUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL2108313::CONBERCEPT",
+            "multi_target::VEGFA::CHEMBL1201421::PEGAPTANIBSODIUM"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "BEVACIZUMAB",
+            "BEVACIZUMAB GAMMA",
+            "BEVACIZUMAB 111IN",
+            "VANUCIZUMAB",
+            "FARICIMAB",
+            "ABICIPAR PEGOL",
+            "AFLIBERCEPT",
+            "BROLUCIZUMAB",
+            "CONBERCEPT",
+            "PEGAPTANIB SODIUM"
+          ],
+          "top_distances": [
+            0.982512891292572,
+            0.9841148853302002,
+            0.9984773993492126,
+            1.0220930576324463,
+            1.0494184494018555,
+            1.050940990447998,
+            1.0545176267623901,
+            1.0589594841003418,
+            1.060068130493164,
+            1.06620454788208
+          ]
+        },
+        {
+          "question": "Which VEGFA therapies have DrugCentral indication evidence?",
+          "expected_target": "VEGFA",
+          "expected_source": "DrugCentral",
+          "category": "Indication Evidence",
+          "expected_drugs": [
+            "AFLIBERCEPT",
+            "BEVACIZUMAB",
+            "RANIBIZUMAB"
+          ],
+          "target_filter": {
+            "target_symbol": "VEGFA"
+          },
+          "hit": true,
+          "rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_ids": [
+            "multi_target::VEGFA::CHEMBL1201421::PEGAPTANIBSODIUM",
+            "multi_target::VEGFA::CHEMBL2108752::PEGAPTANIBOCTASODIUM",
+            "multi_target::VEGFA::CHEMBL3545259::VANUCIZUMAB",
+            "multi_target::VEGFA::CHEMBL4297684::ABICIPARPEGOL",
+            "multi_target::VEGFA::CHEMBL4297163::MUPARFOSTAT",
+            "multi_target::VEGFA::CHEMBL5314727::BEVACIZUMABGAMMA",
+            "multi_target::VEGFA::CHEMBL4297750::FARICIMAB",
+            "multi_target::VEGFA::CHEMBL1201583::BEVACIZUMAB",
+            "multi_target::VEGFA::CHEMBL3707253::BEVACIZUMAB111IN",
+            "multi_target::VEGFA::CHEMBL3707357::BROLUCIZUMAB"
+          ],
+          "top_targets": [
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA",
+            "VEGFA"
+          ],
+          "top_drugs": [
+            "PEGAPTANIB SODIUM",
+            "PEGAPTANIB OCTASODIUM",
+            "VANUCIZUMAB",
+            "ABICIPAR PEGOL",
+            "MUPARFOSTAT",
+            "BEVACIZUMAB GAMMA",
+            "FARICIMAB",
+            "BEVACIZUMAB",
+            "BEVACIZUMAB 111IN",
+            "BROLUCIZUMAB"
+          ],
+          "top_distances": [
+            0.9914204478263855,
+            0.9943888187408447,
+            1.0037171840667725,
+            1.004213809967041,
+            1.0052061080932617,
+            1.0094138383865356,
+            1.0099692344665527,
+            1.011436939239502,
+            1.011777400970459,
+            1.020977258682251
+          ]
+        }
+      ]
+    }
+  ]
+}

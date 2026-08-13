@@ -34,10 +34,14 @@ data/processed/
 *.json
 !evaluation/retrieval_results.json
 !evaluation/retrieval_results_multi_target.json
+!evaluation/retrieval_comparison_results.json
+!evaluation/llm_evaluation_results.json
 !monitoring/grafana/dashboards/*.json
 *.parquet
 *.db
+*.duckdb
 *.sqlite3
+.dlt/
 chroma_db/
 faq.db
 

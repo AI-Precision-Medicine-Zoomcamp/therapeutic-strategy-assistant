@@ -51,6 +51,22 @@ Retrieval hits: 24 / 24
 Hit rate: 1.0
 ```
 
+## Project Evaluation Criteria
+
+This section maps the project to the capstone review areas.
+
+| Criteria | Where to check |
+| --- | --- |
+| Problem description | Project summary, data sources, safety notes, and this README |
+| Retrieval flow | `app/rag_pipeline.py` and `ingestion/index_to_vectordb.py` |
+| Retrieval evaluation | `evaluation/retrieval_eval.py`, `make eval`, and `make eval-compare` |
+| LLM evaluation | `app/services/evaluation_service.py` and `evaluation/llm_answer_eval.py` |
+| Interface | FastAPI in `app/main.py` and Streamlit in `frontend/streamlit_app.py` |
+| Ingestion pipeline | Notebooks 01-16, ChromaDB indexing, and `ingestion/dlt_pipeline.py` |
+| Monitoring | PostgreSQL logging, user feedback, and Grafana dashboard |
+| Containerization | `Dockerfile` and `docker-compose.yml` |
+| Reproducibility | `pyproject.toml`, `uv.lock`, `.env.example`, Makefile commands, and setup steps |
+
 ## Targets
 
 | Display name | Canonical symbol |
@@ -88,10 +104,10 @@ notebooks/
   Source-specific exploration, cleaning, and knowledge-base notebooks.
 
 ingestion/
-  ChromaDB indexing for retrieval-ready chunks.
+  ChromaDB indexing and dlt loading for retrieval-ready chunks.
 
 evaluation/
-  Retrieval questions, retrieval evaluation script, and saved retrieval results.
+  Retrieval questions, retrieval comparison, answer evaluation, and saved results.
 
 app/
   Local RAG pipeline, LLM answer service, and FastAPI application.
@@ -217,6 +233,22 @@ Chunks indexed: 207
 Targets: ALK, BRAF, EGFR, ERBB2, KRAS, MET, PIK3CA, VEGFA
 ```
 
+## Run The dlt Ingestion Pipeline
+
+The notebooks create the final project dataset. The dlt script gives the project an automated ingestion step over the final retrieval chunks and loads them into a local DuckDB destination:
+
+```bash
+uv run python ingestion/dlt_pipeline.py
+```
+
+This follows the dlt workshop pattern:
+
+```text
+JSONL chunks -> dlt resource -> DuckDB dataset
+```
+
+The ChromaDB index is still used for retrieval. The dlt pipeline is used as a reproducible ingestion layer for the processed knowledge-base chunks.
+
 ### Vector Store Choice
 
 This capstone uses ChromaDB as the local vector store for the biomedical evidence chunks. The core flow still follows the course pattern:
@@ -255,6 +287,47 @@ Hits: 24
 Hit rate: 1.0
 ```
 
+## Compare Retrieval Approaches
+
+For the full retrieval-evaluation requirement, compare more than one retrieval setup:
+
+```bash
+make eval-compare
+```
+
+The comparison includes:
+
+```text
+ChromaDB top-5 retrieval
+ChromaDB top-5 retrieval with target filter
+ChromaDB top-5 retrieval with target filter and drug-name reranking
+ChromaDB top-10 retrieval with target filter and drug-name reranking
+```
+
+The script reports Hit Rate and MRR, saves the comparison to:
+
+```text
+evaluation/retrieval_comparison_results.json
+```
+
+The best evaluated setup is target filtering with named-drug reranking at `top_k=5`. The app uses this as the default in `app/rag_pipeline.py`.
+
+## Compare Answer Prompts
+
+For answer evaluation, compare two answer-generation prompt styles using the same retrieved context and the same LLM-as-a-judge evaluator:
+
+```bash
+make eval-llm
+```
+
+This writes:
+
+```text
+evaluation/llm_evaluation_results.json
+```
+
+This command requires `OPENAI_API_KEY`. If no key is available, the script still runs but marks the judge result as `NOT_EVALUATED`.
+
 ## Run Local RAG
 
 Ask a question from the command line:
@@ -263,7 +336,7 @@ Ask a question from the command line:
 UV_CACHE_DIR=.uv-cache uv run python -m app.rag_pipeline \
   --question "What evidence supports sotorasib as a KRAS therapy?" \
   --target KRAS \
-  --top-k 3
+  --top-k 5
 ```
 
 If `OPENAI_API_KEY` is set, the pipeline returns a generated answer grounded in retrieved evidence. If the key is missing, it returns an evidence-only fallback so retrieval can still be tested.
@@ -303,7 +376,7 @@ Example question:
 ```bash
 curl -X POST http://127.0.0.1:8000/ask \
   -H "Content-Type: application/json" \
-  -d '{"question": "What evidence supports sotorasib as a KRAS therapy?", "target_symbol": "KRAS", "top_k": 3}'
+  -d '{"question": "What evidence supports sotorasib as a KRAS therapy?", "target_symbol": "KRAS", "top_k": 5}'
 ```
 
 Example feedback:
@@ -378,6 +451,17 @@ make db-summary
 ```
 
 The Grafana dashboard reads from the same PostgreSQL tables.
+
+The provisioned Grafana dashboard includes five chart panels plus a recent-conversations table:
+
+```text
+response time over time
+estimated cost over time
+token usage over time
+judge relevance
+user feedback
+recent conversations
+```
 
 ## Run With Docker Compose
 
@@ -462,4 +546,5 @@ The current capstone implementation now covers local RAG, LLM-as-a-judge evaluat
 1. Add deployment-specific documentation for the final hosting target.
 2. Expand answer evaluation with a curated biomedical judge dataset.
 3. Compare ChromaDB with the exact vector-search stack used in the course.
+4. Add hybrid search by combining keyword retrieval with vector retrieval.
 ```

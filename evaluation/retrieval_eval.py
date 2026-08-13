@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 import sys
 from pathlib import Path
 from typing import Any
@@ -24,6 +25,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from ingestion.index_to_vectordb import (  # noqa: E402
+    CHROMA_DIR,
     DEFAULT_CHUNKS_FILE,
     DEFAULT_COLLECTION_NAME,
     index_chunks,
@@ -32,6 +34,14 @@ from ingestion.index_to_vectordb import (  # noqa: E402
 
 QUESTIONS_FILE = PROJECT_ROOT / "evaluation" / "retrieval_questions_multi_target.jsonl"
 RESULTS_FILE = PROJECT_ROOT / "evaluation" / "retrieval_results_multi_target.json"
+COMPARISON_RESULTS_FILE = PROJECT_ROOT / "evaluation" / "retrieval_comparison_results.json"
+
+
+def repo_path(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(PROJECT_ROOT))
+    except ValueError:
+        return path.name
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -166,19 +176,24 @@ def hit_for_question(documents: list[str], metadatas: list[dict[str, Any]], ques
     )
 
 
-def run_eval(
-    questions_file: Path = QUESTIONS_FILE,
+def first_hit_rank(documents: list[str], metadatas: list[dict[str, Any]], question: dict[str, Any]) -> int | None:
+    for rank in range(1, len(documents) + 1):
+        if hit_for_question(documents[:rank], metadatas[:rank], question):
+            return rank
+    return None
+
+
+def evaluate_collection(
+    collection,
+    chunks: list[dict[str, Any]],
+    questions: list[dict[str, Any]],
     chunks_file: Path = DEFAULT_CHUNKS_FILE,
     collection_name: str = DEFAULT_COLLECTION_NAME,
     top_k: int = 10,
     use_target_filter: bool = True,
+    rerank_named_drugs: bool = True,
+    approach_name: str = "chroma_target_filter_rerank",
 ) -> dict[str, Any]:
-    collection, chunks = index_chunks(
-        chunks_file=chunks_file,
-        collection_name=collection_name,
-        reset=True,
-    )
-    questions = load_jsonl(questions_file)
     results = []
 
     indexed_targets = sorted({chunk.get("metadata", {}).get("target_symbol", "") for chunk in chunks})
@@ -199,18 +214,21 @@ def run_eval(
         metadatas = response["metadatas"][0]
         ids = response["ids"][0]
         distances = response.get("distances", [[]])[0]
-        documents, metadatas, ids, distances = rerank_named_drug_matches(
-            question=question,
-            documents=documents,
-            metadatas=metadatas,
-            ids=ids,
-            distances=distances,
-        )
+        if rerank_named_drugs:
+            documents, metadatas, ids, distances = rerank_named_drug_matches(
+                question=question,
+                documents=documents,
+                metadatas=metadatas,
+                ids=ids,
+                distances=distances,
+            )
         documents = documents[:top_k]
         metadatas = metadatas[:top_k]
         ids = ids[:top_k]
         distances = distances[:top_k]
         hit = hit_for_question(documents, metadatas, question)
+        rank = first_hit_rank(documents, metadatas, question)
+        reciprocal_rank = 1 / rank if rank else 0.0
 
         results.append(
             {
@@ -221,6 +239,8 @@ def run_eval(
                 "expected_drugs": question.get("expected_drugs", []),
                 "target_filter": where,
                 "hit": hit,
+                "rank": rank,
+                "reciprocal_rank": reciprocal_rank,
                 "top_ids": ids,
                 "top_targets": [metadata.get("target_symbol", "") for metadata in metadatas],
                 "top_drugs": [metadata.get("drug_name", "") for metadata in metadatas],
@@ -229,6 +249,7 @@ def run_eval(
         )
 
     hit_count = sum(1 for result in results if result["hit"])
+    mrr = sum(result["reciprocal_rank"] for result in results) / len(results) if results else 0.0
     questions_by_target = sorted({str(question.get("expected_target", "")) for question in questions if question.get("expected_target")})
     hits_by_target = {
         target: {
@@ -242,16 +263,110 @@ def run_eval(
         values["hit_rate"] = values["hit_count"] / count if count else 0.0
 
     return {
-        "chunks_file": str(chunks_file),
+        "approach_name": approach_name,
+        "chunks_file": repo_path(chunks_file),
         "collection_name": collection_name,
+        "top_k": top_k,
         "use_target_filter": use_target_filter,
+        "rerank_named_drugs": rerank_named_drugs,
         "indexed_chunk_count": len(chunks),
         "indexed_targets": indexed_targets,
         "question_count": len(questions),
         "hit_count": hit_count,
         "hit_rate": hit_count / len(questions) if questions else 0.0,
+        "mrr": mrr,
         "hits_by_target": hits_by_target,
         "results": results,
+    }
+
+
+def run_eval(
+    questions_file: Path = QUESTIONS_FILE,
+    chunks_file: Path = DEFAULT_CHUNKS_FILE,
+    collection_name: str = DEFAULT_COLLECTION_NAME,
+    top_k: int = 10,
+    use_target_filter: bool = True,
+    rerank_named_drugs: bool = True,
+    approach_name: str = "chroma_target_filter_rerank",
+    reset_index: bool = True,
+) -> dict[str, Any]:
+    collection, chunks = index_chunks(
+        chunks_file=chunks_file,
+        collection_name=collection_name,
+        reset=reset_index,
+    )
+    questions = load_jsonl(questions_file)
+    return evaluate_collection(
+        collection=collection,
+        chunks=chunks,
+        questions=questions,
+        chunks_file=chunks_file,
+        collection_name=collection_name,
+        top_k=top_k,
+        use_target_filter=use_target_filter,
+        rerank_named_drugs=rerank_named_drugs,
+        approach_name=approach_name,
+    )
+
+
+def compare_retrieval_approaches(
+    questions_file: Path = QUESTIONS_FILE,
+    chunks_file: Path = DEFAULT_CHUNKS_FILE,
+    collection_name: str = DEFAULT_COLLECTION_NAME,
+) -> dict[str, Any]:
+    approaches = [
+        {
+            "approach_name": "chroma_top5",
+            "top_k": 5,
+            "use_target_filter": False,
+            "rerank_named_drugs": False,
+        },
+        {
+            "approach_name": "chroma_target_filter_top5",
+            "top_k": 5,
+            "use_target_filter": True,
+            "rerank_named_drugs": False,
+        },
+        {
+            "approach_name": "chroma_target_filter_rerank_top5",
+            "top_k": 5,
+            "use_target_filter": True,
+            "rerank_named_drugs": True,
+        },
+        {
+            "approach_name": "chroma_target_filter_rerank_top10",
+            "top_k": 10,
+            "use_target_filter": True,
+            "rerank_named_drugs": True,
+        },
+    ]
+
+    if CHROMA_DIR.exists():
+        shutil.rmtree(CHROMA_DIR)
+
+    collection, chunks = index_chunks(
+        chunks_file=chunks_file,
+        collection_name=collection_name,
+        reset=False,
+    )
+    questions = load_jsonl(questions_file)
+
+    summaries = [
+        evaluate_collection(
+            collection=collection,
+            chunks=chunks,
+            questions=questions,
+            chunks_file=chunks_file,
+            collection_name=collection_name,
+            **approach,
+        )
+        for approach in approaches
+    ]
+    best = max(summaries, key=lambda item: (item["hit_rate"], item["mrr"], item["hit_count"]))
+
+    return {
+        "best_approach": best["approach_name"],
+        "approaches": summaries,
     }
 
 
@@ -261,19 +376,47 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--chunks-file", type=Path, default=DEFAULT_CHUNKS_FILE)
     parser.add_argument("--collection-name", default=DEFAULT_COLLECTION_NAME)
     parser.add_argument("--results-file", type=Path, default=RESULTS_FILE)
+    parser.add_argument("--comparison-results-file", type=Path, default=COMPARISON_RESULTS_FILE)
     parser.add_argument("--top-k", type=int, default=10)
     parser.add_argument("--no-target-filter", action="store_true", help="Disable target_symbol filters during evaluation.")
+    parser.add_argument("--no-rerank", action="store_true", help="Disable exact drug-name reranking.")
+    parser.add_argument("--compare", action="store_true", help="Compare multiple retrieval approaches and save the result.")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+
+    if args.compare:
+        comparison = compare_retrieval_approaches(
+            questions_file=args.questions_file,
+            chunks_file=args.chunks_file,
+            collection_name=args.collection_name,
+        )
+        args.comparison_results_file.write_text(json.dumps(comparison, indent=2))
+
+        print("Retrieval approach comparison")
+        print("=" * 70)
+        print("Best approach:", comparison["best_approach"])
+        for summary in comparison["approaches"]:
+            print(
+                f"{summary['approach_name']}: "
+                f"hit_rate={summary['hit_rate']:.3f}, "
+                f"mrr={summary['mrr']:.3f}, "
+                f"top_k={summary['top_k']}, "
+                f"target_filter={summary['use_target_filter']}, "
+                f"rerank={summary['rerank_named_drugs']}"
+            )
+        print("Results file:", args.comparison_results_file)
+        return
+
     summary = run_eval(
         questions_file=args.questions_file,
         chunks_file=args.chunks_file,
         collection_name=args.collection_name,
         top_k=args.top_k,
         use_target_filter=not args.no_target_filter,
+        rerank_named_drugs=not args.no_rerank,
     )
     args.results_file.write_text(json.dumps(summary, indent=2))
 
@@ -282,9 +425,11 @@ def main() -> None:
     print("Chunks indexed:", summary["indexed_chunk_count"])
     print("Targets indexed:", ", ".join(summary["indexed_targets"]))
     print("Target filter:", "enabled" if summary["use_target_filter"] else "disabled")
+    print("Drug-name rerank:", "enabled" if summary["rerank_named_drugs"] else "disabled")
     print("Questions:", summary["question_count"])
     print("Hits:", summary["hit_count"])
     print("Hit rate:", round(summary["hit_rate"], 3))
+    print("MRR:", round(summary["mrr"], 3))
     print("Results file:", args.results_file)
     print()
 

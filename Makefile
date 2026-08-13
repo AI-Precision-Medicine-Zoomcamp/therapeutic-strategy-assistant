@@ -1,4 +1,4 @@
-.PHONY: setup test index eval db-init db-summary run-api run-ui up down telemetry
+.PHONY: setup test index dlt-ingest eval eval-compare eval-llm db-init db-summary run-api run-ui up down telemetry
 
 setup:
 	uv sync
@@ -9,8 +9,17 @@ test:
 index:
 	uv run python ingestion/index_to_vectordb.py
 
+dlt-ingest:
+	uv run python ingestion/dlt_pipeline.py
+
 eval:
 	uv run python evaluation/retrieval_eval.py
+
+eval-compare:
+	uv run python evaluation/retrieval_eval.py --compare
+
+eval-llm:
+	uv run python evaluation/llm_answer_eval.py
 
 db-init:
 	uv run python -m monitoring.telemetry

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import time
 import uuid
@@ -111,6 +112,25 @@ def validate_target(target_symbol: str | None) -> str | None:
     return normalized
 
 
+def normalize_text(value: object) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", str(value).lower()).strip()
+
+
+def rerank_named_drug_matches(question: str, chunks: list[RetrievedChunk]) -> list[RetrievedChunk]:
+    """Keep vector search, then promote exact drug-name matches when the user names a drug."""
+    normalized_question = normalize_text(question)
+    if not normalized_question:
+        return chunks
+
+    def rank_key(chunk: RetrievedChunk) -> tuple[int, float]:
+        drug_name = normalize_text(chunk.metadata.get("drug_name", ""))
+        exact_match = bool(drug_name and drug_name in normalized_question)
+        distance = chunk.distance if chunk.distance is not None else 999999.0
+        return (0 if exact_match else 1, distance)
+
+    return sorted(chunks, key=rank_key)
+
+
 def ensure_collection(collection_name: str = DEFAULT_COLLECTION_NAME):
     """Load the Chroma collection, building it if needed."""
     collection = get_chroma_collection(collection_name=collection_name, reset=False)
@@ -145,7 +165,7 @@ def retrieve_chunks(
         RetrievedChunk(id=chunk_id, text=text, metadata=metadata, distance=distance)
         for chunk_id, text, metadata, distance in zip(ids, documents, metadatas, distances, strict=False)
     ]
-    return chunks[:top_k]
+    return rerank_named_drug_matches(question, chunks)[:top_k]
 
 
 def build_context(chunks: list[RetrievedChunk], max_chars_per_chunk: int = 1800) -> str:
