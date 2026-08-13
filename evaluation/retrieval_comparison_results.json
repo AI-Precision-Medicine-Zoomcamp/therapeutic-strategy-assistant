@@ -335,11 +335,11 @@
           "rank": 1,
           "reciprocal_rank": 1.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
-            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
-            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS"
           ],
           "top_targets": [
             "EGFR",
@@ -349,11 +349,11 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
-            "DACOMITINIB",
-            "ERLOTINIB HYDROCHLORIDE"
+            "ERLOTINIB HYDROCHLORIDE",
+            "DACOMITINIB ANHYDROUS"
           ],
           "top_distances": [
             0.8557912111282349,
@@ -376,11 +376,11 @@
           "rank": 2,
           "reciprocal_rank": 0.5,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
-            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
-            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS"
           ],
           "top_targets": [
             "EGFR",
@@ -390,11 +390,11 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
-            "DACOMITINIB",
-            "ERLOTINIB HYDROCHLORIDE"
+            "ERLOTINIB HYDROCHLORIDE",
+            "DACOMITINIB ANHYDROUS"
           ],
           "top_distances": [
             0.9421122074127197,
@@ -419,11 +419,11 @@
           "rank": 1,
           "reciprocal_rank": 1.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
-            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
-            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS"
           ],
           "top_targets": [
             "EGFR",
@@ -433,11 +433,11 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
-            "DACOMITINIB",
-            "ERLOTINIB HYDROCHLORIDE"
+            "ERLOTINIB HYDROCHLORIDE",
+            "DACOMITINIB ANHYDROUS"
           ],
           "top_distances": [
             0.7336524128913879,
@@ -968,11 +968,11 @@
           "rank": null,
           "reciprocal_rank": 0.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
-            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
-            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS"
           ],
           "top_targets": [
             "EGFR",
@@ -982,11 +982,11 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
-            "DACOMITINIB",
-            "ERLOTINIB HYDROCHLORIDE"
+            "ERLOTINIB HYDROCHLORIDE",
+            "DACOMITINIB ANHYDROUS"
           ],
           "top_distances": [
             0.9954734444618225,
@@ -1052,11 +1052,11 @@
           "rank": null,
           "reciprocal_rank": 0.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
-            "multi_target::EGFR::CHEMBL2105719::DACOMITINIB",
-            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE"
+            "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
+            "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS"
           ],
           "top_targets": [
             "EGFR",
@@ -1066,11 +1066,11 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
-            "DACOMITINIB",
-            "ERLOTINIB HYDROCHLORIDE"
+            "ERLOTINIB HYDROCHLORIDE",
+            "DACOMITINIB ANHYDROUS"
           ],
           "top_distances": [
             0.9596445560455322,
@@ -1430,7 +1430,7 @@
           "rank": 1,
           "reciprocal_rank": 1.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
             "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
@@ -1444,7 +1444,7 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
             "ERLOTINIB HYDROCHLORIDE",
@@ -1473,7 +1473,7 @@
           "rank": 2,
           "reciprocal_rank": 0.5,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
             "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
@@ -1487,7 +1487,7 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
             "ERLOTINIB HYDROCHLORIDE",
@@ -1518,7 +1518,7 @@
           "rank": 1,
           "reciprocal_rank": 1.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
             "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
@@ -1532,7 +1532,7 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
             "ERLOTINIB HYDROCHLORIDE",
@@ -2523,7 +2523,7 @@
           "rank": 1,
           "reciprocal_rank": 1.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
             "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
@@ -2537,7 +2537,7 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
             "ERLOTINIB HYDROCHLORIDE",
@@ -2567,7 +2567,7 @@
           "reciprocal_rank": 1.0,
           "top_ids": [
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
             "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
             "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE"
@@ -2581,7 +2581,7 @@
           ],
           "top_drugs": [
             "GEFITINIB",
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "BRIGATINIB",
             "ERLOTINIB HYDROCHLORIDE",
             "AFATINIB DIMALEATE"
@@ -2611,7 +2611,7 @@
           "rank": 1,
           "reciprocal_rank": 1.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
             "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
@@ -2625,7 +2625,7 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
             "ERLOTINIB HYDROCHLORIDE",
@@ -3736,16 +3736,16 @@
           "rank": 1,
           "reciprocal_rank": 1.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
             "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
             "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE",
             "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS",
             "multi_target::EGFR::CHEMBL4650319::MOBOCERTINIB",
-            "multi_target::EGFR::CHEMBL180022::NERATINIB",
-            "multi_target::EGFR::CHEMBL3786343::OLMUTINIB",
-            "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB"
+            "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB",
+            "multi_target::EGFR::CHEMBL1201827::PANITUMUMAB",
+            "multi_target::EGFR::CHEMBL1201179::LAPATINIBDITOSYLATE"
           ],
           "top_targets": [
             "EGFR",
@@ -3760,16 +3760,16 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
             "ERLOTINIB HYDROCHLORIDE",
             "AFATINIB DIMALEATE",
             "DACOMITINIB ANHYDROUS",
             "MOBOCERTINIB",
-            "NERATINIB",
-            "OLMUTINIB",
-            "OSIMERTINIB"
+            "OSIMERTINIB",
+            "PANITUMUMAB",
+            "LAPATINIB DITOSYLATE"
           ],
           "top_distances": [
             0.8557912111282349,
@@ -3800,15 +3800,15 @@
           "reciprocal_rank": 1.0,
           "top_ids": [
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
             "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
             "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE",
             "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS",
             "multi_target::EGFR::CHEMBL4650319::MOBOCERTINIB",
-            "multi_target::EGFR::CHEMBL180022::NERATINIB",
-            "multi_target::EGFR::CHEMBL3786343::OLMUTINIB",
-            "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB"
+            "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB",
+            "multi_target::EGFR::CHEMBL1201827::PANITUMUMAB",
+            "multi_target::EGFR::CHEMBL1201179::LAPATINIBDITOSYLATE"
           ],
           "top_targets": [
             "EGFR",
@@ -3824,15 +3824,15 @@
           ],
           "top_drugs": [
             "GEFITINIB",
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "BRIGATINIB",
             "ERLOTINIB HYDROCHLORIDE",
             "AFATINIB DIMALEATE",
             "DACOMITINIB ANHYDROUS",
             "MOBOCERTINIB",
-            "NERATINIB",
-            "OLMUTINIB",
-            "OSIMERTINIB"
+            "OSIMERTINIB",
+            "PANITUMUMAB",
+            "LAPATINIB DITOSYLATE"
           ],
           "top_distances": [
             0.9421122074127197,
@@ -3864,16 +3864,16 @@
           "rank": 1,
           "reciprocal_rank": 1.0,
           "top_ids": [
-            "multi_target::EGFR::CHEMBL4297774::AMIVANTAMAB",
+            "multi_target::EGFR::CHEMBL1201577::CETUXIMAB",
             "multi_target::EGFR::CHEMBL939::GEFITINIB",
             "multi_target::EGFR::CHEMBL3545311::BRIGATINIB",
             "multi_target::EGFR::CHEMBL1079742::ERLOTINIBHYDROCHLORIDE",
             "multi_target::EGFR::CHEMBL2105712::AFATINIBDIMALEATE",
             "multi_target::EGFR::CHEMBL2110732::DACOMITINIBANHYDROUS",
             "multi_target::EGFR::CHEMBL4650319::MOBOCERTINIB",
-            "multi_target::EGFR::CHEMBL180022::NERATINIB",
-            "multi_target::EGFR::CHEMBL3786343::OLMUTINIB",
-            "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB"
+            "multi_target::EGFR::CHEMBL3353410::OSIMERTINIB",
+            "multi_target::EGFR::CHEMBL1201827::PANITUMUMAB",
+            "multi_target::EGFR::CHEMBL1201179::LAPATINIBDITOSYLATE"
           ],
           "top_targets": [
             "EGFR",
@@ -3888,16 +3888,16 @@
             "EGFR"
           ],
           "top_drugs": [
-            "AMIVANTAMAB",
+            "CETUXIMAB",
             "GEFITINIB",
             "BRIGATINIB",
             "ERLOTINIB HYDROCHLORIDE",
             "AFATINIB DIMALEATE",
             "DACOMITINIB ANHYDROUS",
             "MOBOCERTINIB",
-            "NERATINIB",
-            "OLMUTINIB",
-            "OSIMERTINIB"
+            "OSIMERTINIB",
+            "PANITUMUMAB",
+            "LAPATINIB DITOSYLATE"
           ],
           "top_distances": [
             0.7336524128913879,
